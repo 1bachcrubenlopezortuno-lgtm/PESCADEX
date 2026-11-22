@@ -4,6 +4,7 @@ import { AuthProvider, useAuth, type AuthStatus } from './auth/AuthProvider';
 import { JoinPage } from './auth/JoinPage';
 import { LoginPage } from './auth/LoginPage';
 import { CatchPage } from './catches/CatchPage';
+import { RegisterPage } from './catches/RegisterPage';
 import { NotebookPage } from './outings/NotebookPage';
 import { OutingPage } from './outings/OutingPage';
 import { PescadexPage } from './pescadex/PescadexPage';
@@ -44,7 +45,7 @@ export function AppRoutes() {
         <Route path="/especie/:id" element={<SpeciesPage />} />
         <Route path="/cuaderno" element={<NotebookPage />} />
         <Route path="/jornada/:id" element={<OutingPage />} />
-        <Route path="/registrar" element={<Placeholder title="Registrar" />} />
+        <Route path="/registrar" element={<RegisterPage />} />
         <Route path="/captura/:id" element={<CatchPage />} />
         <Route path="/perfil" element={<Placeholder title="Perfil" />} />
         <Route path="/perfil/:userId" element={<Placeholder title="Perfil" />} />

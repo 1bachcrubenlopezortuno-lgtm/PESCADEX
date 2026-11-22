@@ -75,3 +75,13 @@ fieldset.field { border: 1px solid var(--border); border-radius: 8px; padding: 8
 .tag.warn { background: #fbe9eb; color: var(--danger); font-weight: 600; }
 .file-btn { margin: 8px 0 12px; }
 .card p { margin: 6px 0; }
+.row.two > .field { flex: 1; min-width: 120px; }
+.small { font-size: 0.85rem; }
+.thumbs { display: flex; gap: 8px; overflow-x: auto; margin-bottom: 12px; }
+.thumbs img { width: 88px; height: 88px; object-fit: cover; border-radius: 10px; }
+.picker-results { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+.picker-option { text-align: left; padding: 10px; border: 1px solid var(--border); background: var(--surface); border-radius: 8px; }
+.picked { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.legal-inline { flex-basis: 100%; margin: 4px 0; font-size: 0.85rem; background: #fff6e0; padding: 6px 8px; border-radius: 6px; }
+.register-done { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; text-align: center; align-items: center; }
+.celebrate { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 0; }
