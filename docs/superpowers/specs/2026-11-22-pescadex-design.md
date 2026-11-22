@@ -1,6 +1,6 @@
 # Pescadex — Diseño
 
-Fecha: 2026-11-22 · Estado: pendiente de aprobación final
+Fecha: 2026-11-22 · Estado: pendiente de aprobación
 
 ## 1. Intención y por qué
 
@@ -207,7 +207,12 @@ haga gracia comparar Pescadex, niveles y récords.
   tramos de río), cada uno con tipo, medio, especies habituales y breve descripción.
 - Al registrar una jornada dentro del radio de un sitio, este queda como **"zona visitada"**
   para ese usuario (y suma a medallas tipo "explorador").
-- Origen de los sitios: PENDIENTE de decidir con el usuario.
+- Origen de los sitios (decidido): **lista inicial + aportaciones del grupo**.
+  - Lista semilla de ~40–60 sitios públicos y conocidos repartidos por las 8 provincias
+    (costa de Huelva, Cádiz, Málaga, Granada y Almería; embalses y ríos de interior),
+    en un archivo semilla editable. Ubicaciones de sitios conocidos, no pesqueros privados.
+  - Cualquier miembro puede añadir un sitio desde la app (nombre, tipo, punto, nota);
+    queda visible para todo el grupo con su autor. Solo el autor puede editarlo o borrarlo.
 - No se incluyen zonas donde la pesca recreativa esté prohibida (reservas marinas integrales,
   zonas de exclusión de parques naturales).
 
