@@ -10,12 +10,16 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/apple-touch-icon.png'],
       manifest: {
+        id: '/',
         name: 'Pescadex',
         short_name: 'Pescadex',
         description: 'La Pokédex de pesca del grupo',
         lang: 'es',
         display: 'standalone',
         start_url: '/',
+        scope: '/',
+        orientation: 'portrait',
+        categories: ['sports', 'lifestyle'],
         background_color: '#f4f1ea',
         theme_color: '#0b4f6c',
         icons: [
