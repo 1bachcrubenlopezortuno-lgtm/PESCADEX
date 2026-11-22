@@ -14,10 +14,13 @@
   "backgroundColor": "#F4F1EA",
   "enableNotifications": false,
   "startUrl": "/",
-  "iconUrl": "https://pescadex-ol0y.netlify.app/icons/icon-512.png",
-  "maskableIconUrl": "https://pescadex-ol0y.netlify.app/icons/icon-maskable-512.png",
+  "iconUrl": "http://localhost:8080/icons/icon-512.png",
+  "maskableIconUrl": "http://localhost:8080/icons/icon-maskable-512.png",
   "splashScreenFadeOutDuration": 300,
-  "signingKey": { "path": "./signing.keystore", "alias": "pescadex" },
+  "signingKey": {
+    "path": "./signing.keystore",
+    "alias": "pescadex"
+  },
   "appVersionName": "1.0.0",
   "appVersionCode": 1,
   "shortcuts": [],
@@ -25,7 +28,9 @@
   "webManifestUrl": "https://pescadex-ol0y.netlify.app/manifest.webmanifest",
   "fallbackType": "customtabs",
   "features": {},
-  "alphaDependencies": { "enabled": false },
+  "alphaDependencies": {
+    "enabled": false
+  },
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
   "isMetaQuest": false,

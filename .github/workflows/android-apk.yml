@@ -57,6 +57,12 @@ jobs:
           echo "BUBBLEWRAP_KEY_PASSWORD=$PASS" >> "$GITHUB_ENV"
           printf 'Keystore: signing.keystore\nAlias: pescadex\nContraseña (almacén y clave): %s\n' "$PASS" > clave-firma.txt
 
+      - name: Servir los iconos en local (no depende de que la web sea accesible)
+        run: |
+          (cd public && python3 -m http.server 8080 > /dev/null 2>&1 &)
+          sleep 2
+          curl -fsS -o /dev/null http://localhost:8080/icons/icon-512.png
+
       - name: Generar proyecto Android
         working-directory: android
         run: bubblewrap update --skipVersionUpgrade
