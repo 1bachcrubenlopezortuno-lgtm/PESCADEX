@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../auth/AuthProvider';
 import { useGeolocation } from '../catches/useGeolocation';
 import { createOuting, endOuting, listOutings } from '../data/api';
-import type { Outing, OutingMode } from '../data/types';
+import type { LatLng, Outing, OutingMode } from '../data/types';
 
 export const ACTIVE_WINDOW_MS = 18 * 3600_000;
 
@@ -39,8 +39,8 @@ export function useActiveOuting() {
   }, [reload]);
 
   const start = useCallback(
-    async (input: StartInput): Promise<Outing> => {
-      const location = await request();
+    async (input: StartInput, knownLocation?: LatLng | null): Promise<Outing> => {
+      const location = knownLocation !== undefined ? knownLocation : await request();
       const outing: Outing = {
         id: crypto.randomUUID(),
         ownerId: userId,

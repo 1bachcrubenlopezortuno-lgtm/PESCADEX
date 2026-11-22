@@ -41,12 +41,17 @@ Opción B (sin terminal): en el panel de Supabase, abre **SQL Editor** y ejecuta
 Después, en el **SQL Editor**, ejecuta también:
 
 1. El contenido de `supabase/seed.sql` (carga las especies).
-2. El código de invitación del grupo (cámbialo por el que quieras):
+2. El código de invitación del grupo. **Usa un código largo y aleatorio** (por ejemplo, el que
+   genera la propia consulta): quien lo tenga puede ver las fotos y zonas del grupo.
 
    ```sql
-   insert into app_config (id, invite_code) values (1, 'boqueron2026')
-   on conflict (id) do update set invite_code = excluded.invite_code;
+   insert into app_config (id, invite_code) values (1, encode(gen_random_bytes(9), 'base64'))
+   on conflict (id) do update set invite_code = excluded.invite_code
+   returning invite_code;
    ```
+
+   Apunta el código que devuelve y pásaselo solo a tus amigos. Si se filtra, vuelve a
+   ejecutar la consulta para generar otro.
 
 ### 3. Configurar el inicio de sesión con código
 

@@ -186,7 +186,10 @@ create policy catches_delete on public.catches for delete to authenticated using
 
 create policy photos_read on public.catch_photos for select to authenticated using (public.is_member());
 create policy photos_insert on public.catch_photos for insert to authenticated
-  with check (public.is_catch_author(catch_id));
+  with check (
+    public.is_catch_author(catch_id)
+    and path like auth.uid()::text || '/' || catch_id::text || '/%'
+  );
 create policy photos_delete on public.catch_photos for delete to authenticated
   using (public.is_catch_author(catch_id));
 

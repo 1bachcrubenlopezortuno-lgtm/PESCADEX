@@ -83,9 +83,9 @@ export function RegisterPage() {
     setError(null);
     try {
       const myOutings = await listOutings({ userId: me });
-      const outing = active ?? (await start({ mode: 'otra', companionIds: [], shareExact: false }));
-      const newOuting = !myOutings.some((o) => o.id === outing.id);
       const location = (await locationRef.current) ?? null;
+      const outing = active ?? (await start({ mode: 'otra', companionIds: [], shareExact: false }, location));
+      const newOuting = !myOutings.some((o) => o.id === outing.id);
       const caughtAt = new Date().toISOString();
       const kg = toNumber(weight);
       const weightG = kg ? Math.round(kg * 1000) : undefined;

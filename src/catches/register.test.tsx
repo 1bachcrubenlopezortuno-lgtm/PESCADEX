@@ -12,7 +12,14 @@ vi.mock('../data/supabase', async () => {
 vi.mock('../data/api', async () => (await import('../test/mockBackend')).apiMock());
 vi.mock('../data/photo', () => ({ preparePhoto: vi.fn(async () => new Blob(['x'], { type: 'image/jpeg' })) }));
 const geo = vi.hoisted(() => ({ value: null as null | { lat: number; lng: number } }));
-vi.mock('./useGeolocation', () => ({ useGeolocation: () => ({ request: async () => geo.value }) }));
+const geoRequest = vi.hoisted(() => ({ calls: 0 }));
+vi.mock('./useGeolocation', () => {
+  const request = async () => {
+    geoRequest.calls++;
+    return geo.value;
+  };
+  return { useGeolocation: () => ({ request }) }; // estable, como el useCallback real
+});
 
 const photo = () => new File(['img'], 'f.jpg', { type: 'image/jpeg' });
 
@@ -25,6 +32,7 @@ beforeEach(() => {
   resetBackend();
   vi.clearAllMocks();
   geo.value = null;
+  geoRequest.calls = 0;
   asMember();
   backend.profiles = [backend.profile!];
   backend.outings = [makeOuting({ id: 'o-active' })];
@@ -98,4 +106,13 @@ test('si falla la subida de la foto la captura queda guardada sin foto', async (
   await userEvent.click(screen.getByRole('button', { name: 'Guardar captura' }));
   expect(await screen.findByText(/no se pudo subir la foto/i)).toBeInTheDocument();
   expect(api.createCatch).toHaveBeenCalledTimes(1);
+});
+
+test('sin jornada activa el GPS se pide una sola vez', async () => {
+  backend.outings = [];
+  renderApp('/registrar');
+  await pickSpecies('dora', /Dorada/);
+  await userEvent.click(screen.getByRole('button', { name: 'Guardar captura' }));
+  await waitFor(() => expect(api.createCatch).toHaveBeenCalled());
+  expect(geoRequest.calls).toBe(1);
 });
