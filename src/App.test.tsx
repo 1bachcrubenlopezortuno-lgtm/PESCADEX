@@ -1,14 +1,21 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import { AppRoutes } from './App';
+import { screen } from '@testing-library/react';
+import { vi } from 'vitest';
+import { asMember } from './test/mockBackend';
+import { renderApp } from './test/renderApp';
 
-test('muestra la barra inferior con las cuatro secciones', () => {
-  render(
-    <MemoryRouter initialEntries={['/']}>
-      <AppRoutes />
-    </MemoryRouter>,
-  );
+vi.mock('./data/supabase', async () => {
+  const { authMock } = await import('./test/mockBackend');
+  return { supabase: { auth: authMock }, supabaseConfigured: true };
+});
+vi.mock('./data/api', async () => {
+  const { backend } = await import('./test/mockBackend');
+  return { getMyProfile: async () => backend.profile, joinGroup: async () => {} };
+});
+
+test('muestra la barra inferior con las cuatro secciones', async () => {
+  asMember();
+  renderApp('/');
   for (const label of ['Pescadex', 'Cuaderno', 'Registrar', 'Perfil']) {
-    expect(screen.getByRole('link', { name: new RegExp(label) })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: new RegExp(label) })).toBeInTheDocument();
   }
 });
