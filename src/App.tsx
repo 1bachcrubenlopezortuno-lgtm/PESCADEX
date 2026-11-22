@@ -9,6 +9,7 @@ import { NotebookPage } from './outings/NotebookPage';
 import { OutingPage } from './outings/OutingPage';
 import { PescadexPage } from './pescadex/PescadexPage';
 import { SpeciesPage } from './pescadex/SpeciesPage';
+import { ProfilePage } from './profile/ProfilePage';
 import { TabBar } from './ui/TabBar';
 
 const HOME: Record<Exclude<AuthStatus, 'loading'>, string> = { signed_out: '/login', needs_join: '/unirse', member: '/' };
@@ -18,10 +19,6 @@ function Gate({ want, children }: { want: AuthStatus; children: ReactNode }) {
   if (status === 'loading') return <p className="content muted">Cargando…</p>;
   if (status !== want) return <Navigate to={HOME[status]} replace />;
   return <>{children}</>;
-}
-
-function Placeholder({ title }: { title: string }) {
-  return <h1>{title}</h1>;
 }
 
 function Shell() {
@@ -47,8 +44,8 @@ export function AppRoutes() {
         <Route path="/jornada/:id" element={<OutingPage />} />
         <Route path="/registrar" element={<RegisterPage />} />
         <Route path="/captura/:id" element={<CatchPage />} />
-        <Route path="/perfil" element={<Placeholder title="Perfil" />} />
-        <Route path="/perfil/:userId" element={<Placeholder title="Perfil" />} />
+        <Route path="/perfil" element={<ProfilePage />} />
+        <Route path="/perfil/:userId" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

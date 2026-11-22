@@ -85,3 +85,10 @@ fieldset.field { border: 1px solid var(--border); border-radius: 8px; padding: 8
 .legal-inline { flex-basis: 100%; margin: 4px 0; font-size: 0.85rem; background: #fff6e0; padding: 6px 8px; border-radius: 6px; }
 .register-done { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; text-align: center; align-items: center; }
 .celebrate { font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 0; }
+.profile-head { display: flex; gap: 16px; align-items: flex-start; }
+.profile-head h1 { margin: 0; }
+.grow { flex: 1; min-width: 0; }
+.avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 1.6rem; font-weight: 800; flex-shrink: 0; }
+.level { font-weight: 700; color: var(--primary); margin: 4px 0; }
+.xp-bar { height: 12px; border-radius: 999px; background: #e2dccd; overflow: hidden; }
+.xp-bar > div { height: 100%; background: linear-gradient(90deg, var(--accent), #f6c96d); }
