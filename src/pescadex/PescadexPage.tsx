@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../auth/AuthProvider';
 import { SPECIES } from '../catalog/catalog';
 import { RARITIES, RARITY_LABEL, type Habitat, type Rarity } from '../catalog/types';
-import { toGameCatch } from '../data/api';
+import { listOutings, toGameCatch } from '../data/api';
+import { levelInfo } from '../game/levels';
+import { totalXp } from '../game/xp';
 import { pescadexProgress, unlockedSpeciesIds } from '../game/pescadex';
 import { SpeciesCard } from './SpeciesCard';
 import { useMyCatches } from './useMyCatches';
@@ -16,8 +18,16 @@ export function PescadexPage() {
   const [rarity, setRarity] = useState<Rarity | ''>('');
   const [status, setStatus] = useState<Status>('todas');
 
-  const unlocked = useMemo(() => unlockedSpeciesIds(catches.map(toGameCatch)), [catches]);
+  const [outingCount, setOutingCount] = useState(0);
+  useEffect(() => {
+    listOutings({ userId: profile!.id }).then((o) => setOutingCount(o.length)).catch(() => {});
+  }, [profile]);
+
+  const game = useMemo(() => catches.map(toGameCatch), [catches]);
+  const unlocked = useMemo(() => unlockedSpeciesIds(game), [game]);
   const progress = pescadexProgress(unlocked);
+  const lvl = levelInfo(totalXp(game, outingCount));
+  const initial = profile!.displayName.trim().charAt(0).toUpperCase();
 
   const visible = SPECIES.filter(
     (s) =>
@@ -29,14 +39,19 @@ export function PescadexPage() {
   return (
     <div>
       <header className="pescadex-header">
-        <h1>Pescadex</h1>
-        {!loading && (
-          <div className="progress">
-            <div className="progress-bar"><div style={{ width: `${progress.percent}%` }} /></div>
-            <span>{`${progress.unlocked}/${progress.total} (${progress.percent}%)`}</span>
-          </div>
-        )}
+        <div className="avatar" aria-hidden="true">{initial}</div>
+        <div className="who">
+          <h1>Pescadex</h1>
+          <p className="level">{`Nv. ${lvl.level} · ${lvl.title}`}</p>
+        </div>
+        <div className="ring" style={{ ['--p' as string]: progress.percent }} aria-hidden="true"><span>{progress.percent}%</span></div>
       </header>
+      {!loading && (
+        <div className="progress">
+          <div className="progress-bar"><div style={{ width: `${progress.percent}%` }} /></div>
+          <span>{`${progress.unlocked}/${progress.total} (${progress.percent}%)`}</span>
+        </div>
+      )}
       {error && <p className="error">{error}</p>}
       <div className="filters">
         {([['mar', 'Mar'], ['dulce', 'Agua dulce']] as const).map(([h, label]) => (

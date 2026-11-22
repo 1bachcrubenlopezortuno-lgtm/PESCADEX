@@ -25,7 +25,7 @@ export function JoinPage() {
 
   return (
     <div className="content auth-page">
-      <div className="auth-logo" aria-hidden="true">🐟</div>
+      <img className="auth-logo" src="/icons/icon-192.png" alt="" />
       <h1>Únete al grupo</h1>
       <p className="muted">Pide el código de invitación a quien te pasó la app.</p>
       <form onSubmit={submit}>

@@ -20,11 +20,11 @@ beforeEach(() => {
   backend.profiles = [backend.profile!];
 });
 
-test('sin capturas: siluetas, protegidas con candado y 0%', async () => {
+test('sin capturas: nombre visible con interrogación, protegidas con candado y 0%', async () => {
   renderApp('/');
   expect(await screen.findByText(`0/${total} (0%)`)).toBeInTheDocument();
-  expect(within(card('dorada')).getByText('???')).toBeInTheDocument();
-  expect(within(card('dorada')).queryByText('Dorada')).toBeNull();
+  expect(within(card('dorada')).getByText('Dorada')).toBeInTheDocument();
+  expect(within(card('dorada')).getByTestId('art-unknown')).toBeInTheDocument();
   expect(within(card('anguila')).getByText('Anguila')).toBeInTheDocument();
   expect(within(card('anguila')).getByText('🔒')).toBeInTheDocument();
 });
@@ -33,14 +33,14 @@ test('una dorada con foto la desbloquea', async () => {
   backend.catches = [makeCatch({ speciesId: 'dorada' })];
   renderApp('/');
   expect(await screen.findByText(new RegExp(`^1/${total}`))).toBeInTheDocument();
-  expect(within(card('dorada')).getByText('Dorada')).toBeInTheDocument();
+  expect(within(card('dorada')).getByTestId('art-revealed')).toBeInTheDocument();
 });
 
 test('una dorada sin foto no la desbloquea', async () => {
   backend.catches = [makeCatch({ speciesId: 'dorada', photoUrls: [] })];
   renderApp('/');
   expect(await screen.findByText(`0/${total} (0%)`)).toBeInTheDocument();
-  expect(within(card('dorada')).getByText('???')).toBeInTheDocument();
+  expect(within(card('dorada')).getByTestId('art-unknown')).toBeInTheDocument();
 });
 
 test('filtro de agua dulce', async () => {
@@ -59,7 +59,8 @@ test('ficha de especie regulada muestra aviso y normativa', async () => {
   expect(screen.getByText(/Muy regulado/)).toBeInTheDocument();
 });
 
-test('ficha sin capturar oculta el nombre', async () => {
+test('ficha sin capturar muestra el nombre y la interrogación', async () => {
   renderApp('/especie/urta');
-  expect(await screen.findByRole('heading', { name: '???' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Urta' })).toBeInTheDocument();
+  expect(screen.getByTestId('art-unknown')).toBeInTheDocument();
 });

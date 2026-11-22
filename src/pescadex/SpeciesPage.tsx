@@ -7,7 +7,7 @@ import { listProfiles, toGameCatch } from '../data/api';
 import type { Profile } from '../data/types';
 import { isValidCatch } from '../game/xp';
 import { formatLength, formatWeight, monthsLabel } from '../ui/format';
-import { FishSilhouette } from './FishSilhouette';
+import { SpeciesArt } from './SpeciesArt';
 import { useCatches } from './useMyCatches';
 
 export function SpeciesPage() {
@@ -29,7 +29,6 @@ export function SpeciesPage() {
   const mine = valid.filter((c) => c.userId === profile!.id);
   const unlocked = mine.length > 0;
   const locked = species.legal === 'protegida';
-  const showName = unlocked || locked;
   const maxWeight = Math.max(0, ...mine.map((c) => c.weightG ?? 0));
   const maxLength = Math.max(0, ...mine.map((c) => c.lengthCm ?? 0));
   const holders = profiles.filter((p) => valid.some((c) => c.userId === p.id));
@@ -37,13 +36,13 @@ export function SpeciesPage() {
   return (
     <div className="species-page">
       <Link to="/" className="muted">← Pescadex</Link>
-      <div className="species-hero" style={{ borderColor: unlocked ? `var(--r-${species.rarity})` : undefined }}>
-        <FishSilhouette species={species} revealed={unlocked} size={120} />
+      <div className={`species-hero${unlocked ? ' unlocked' : ''}`} style={{ ['--rc' as string]: `var(--r-${species.rarity})` }}>
+        <SpeciesArt species={species} revealed={unlocked} size={112} />
         <div>
           <span className="muted">{speciesNumber(species.id)}</span>
-          <h1>{showName ? species.commonName : '???'}</h1>
-          {showName && <p className="muted"><em>{species.scientificName}</em></p>}
-          <span className="tag" style={{ background: `var(--r-${species.rarity})`, color: '#fff' }}>{RARITY_LABEL[species.rarity]}</span>{' '}
+          <h1>{species.commonName}</h1>
+          <p className="muted"><em>{species.scientificName}</em></p>
+          <span className="tag rarity" style={{ ['--rc' as string]: `var(--r-${species.rarity})` }}>{RARITY_LABEL[species.rarity]}</span>{' '}
           <span className="tag">{species.habitats.map((h) => (h === 'mar' ? 'Mar' : 'Agua dulce')).join(' · ')}</span>
         </div>
       </div>
@@ -56,7 +55,8 @@ export function SpeciesPage() {
       )}
 
       <div className="card">
-        <p>{showName ? species.description : 'Todavía no has capturado esta especie. ¡Sal a buscarla!'}</p>
+        <p>{species.description}</p>
+        {!unlocked && !locked && <p className="hint">Todavía no la has capturado. ¡Sal a buscarla!</p>}
         <p><strong>Mejor época:</strong> {monthsLabel(species.bestMonths)}</p>
         <p><strong>Dónde:</strong> {species.zones}</p>
         <p className="muted">{species.group}</p>

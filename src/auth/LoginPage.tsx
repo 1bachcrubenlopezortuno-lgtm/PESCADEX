@@ -39,7 +39,7 @@ export function LoginPage() {
   const isLogin = mode === 'login';
   return (
     <div className="content auth-page">
-      <div className="auth-logo" aria-hidden="true">🎣</div>
+      <img className="auth-logo" src="/icons/icon-192.png" alt="" />
       <h1>Pescadex</h1>
       <p className="muted">La Pokédex de pesca del grupo.</p>
       {!supabaseConfigured && (

@@ -81,7 +81,7 @@ export function ProfilePage() {
         </div>
       </div>
 
-      <h2>🏆 Récords</h2>
+      <h2>Récords</h2>
       {records.length ? (
         <ul className="list">
           {records.map(([sid, r]) => (
@@ -96,7 +96,7 @@ export function ProfilePage() {
         <p className="muted">Aún sin récords (apunta peso o medida en tus capturas).</p>
       )}
 
-      <h2>🐟 Últimas capturas</h2>
+      <h2>Últimas capturas</h2>
       <ul className="list">
         {catches.slice(0, 10).map((c) => (
           <li key={c.id}>
@@ -107,7 +107,7 @@ export function ProfilePage() {
         {catches.length === 0 && <li className="muted">Todavía nada. ¡A pescar!</li>}
       </ul>
 
-      <h2>👥 El grupo</h2>
+      <h2>El grupo</h2>
       <ul className="list">
         {profiles.filter((p) => p.id !== id).map((p) => (
           <li key={p.id}><Link to={`/perfil/${p.id}`}>{p.displayName}</Link></li>
