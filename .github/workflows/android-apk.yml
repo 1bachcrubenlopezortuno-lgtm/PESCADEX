@@ -1,0 +1,97 @@
+# Genera la APK de Android (Trusted Web Activity) a partir de la web publicada.
+# Se ejecuta al cambiar android/twa-manifest.json o a mano desde la pestaña Actions.
+# Resultado: un artefacto "pescadex-android" con la APK, la clave de firma y sus contraseñas,
+# y public/.well-known/assetlinks.json subido al repositorio (Netlify lo publica solo).
+#
+# ⚠️ Cada ejecución crea una clave de firma NUEVA salvo que exista el secreto ANDROID_KEYSTORE_B64.
+# Una APK firmada con otra clave no se puede instalar encima de la anterior.
+name: APK Android
+
+on:
+  push:
+    paths:
+      - android/twa-manifest.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar Bubblewrap
+        run: |
+          npm install -g @bubblewrap/cli@1.27.0
+          mkdir -p ~/.bubblewrap
+          echo "{\"jdkPath\":\"$JAVA_HOME\",\"androidSdkPath\":\"$ANDROID_HOME\"}" > ~/.bubblewrap/config.json
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Clave de firma
+        working-directory: android
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > signing.keystore
+            PASS="$KEYSTORE_PASSWORD"
+          else
+            PASS=$(openssl rand -hex 16)
+            keytool -genkeypair -keystore signing.keystore -alias pescadex -keyalg RSA -keysize 2048 \
+              -validity 10000 -storepass "$PASS" -keypass "$PASS" -dname "CN=Pescadex, O=Pescadex, C=ES"
+          fi
+          echo "::add-mask::$PASS"
+          echo "BUBBLEWRAP_KEYSTORE_PASSWORD=$PASS" >> "$GITHUB_ENV"
+          echo "BUBBLEWRAP_KEY_PASSWORD=$PASS" >> "$GITHUB_ENV"
+          printf 'Keystore: signing.keystore\nAlias: pescadex\nContraseña (almacén y clave): %s\n' "$PASS" > clave-firma.txt
+
+      - name: Generar proyecto Android
+        working-directory: android
+        run: bubblewrap update --skipVersionUpgrade
+
+      - name: Compilar APK
+        working-directory: android
+        run: bubblewrap build --skipPwaValidation
+
+      - name: assetlinks.json
+        working-directory: android
+        run: |
+          FP=$(keytool -list -v -keystore signing.keystore -alias pescadex -storepass "$BUBBLEWRAP_KEYSTORE_PASSWORD" | awk '/SHA256:/{print $2; exit}')
+          PKG=$(node -p "require('./twa-manifest.json').packageId")
+          mkdir -p ../public/.well-known
+          cat > ../public/.well-known/assetlinks.json <<JSON
+          [{
+            "relation": ["delegate_permission/common.handle_all_urls"],
+            "target": { "namespace": "android_app", "package_name": "$PKG", "sha256_cert_fingerprints": ["$FP"] }
+          }]
+          JSON
+          cat ../public/.well-known/assetlinks.json
+          mkdir -p ../salida
+          cp app-release-signed.apk ../salida/Pescadex.apk
+          cp signing.keystore clave-firma.txt ../public/.well-known/assetlinks.json ../salida/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pescadex-android
+          path: salida/
+          retention-days: 90
+
+      - name: Subir assetlinks.json al repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/.well-known/assetlinks.json
+          git diff --cached --quiet || git commit -m "chore: assetlinks.json para la APK de Android"
+          git push
