@@ -3,6 +3,9 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom
 import { AuthProvider, useAuth, type AuthStatus } from './auth/AuthProvider';
 import { JoinPage } from './auth/JoinPage';
 import { LoginPage } from './auth/LoginPage';
+import { CatchPage } from './catches/CatchPage';
+import { NotebookPage } from './outings/NotebookPage';
+import { OutingPage } from './outings/OutingPage';
 import { PescadexPage } from './pescadex/PescadexPage';
 import { SpeciesPage } from './pescadex/SpeciesPage';
 import { TabBar } from './ui/TabBar';
@@ -39,10 +42,10 @@ export function AppRoutes() {
       <Route element={<Gate want="member"><Shell /></Gate>}>
         <Route path="/" element={<PescadexPage />} />
         <Route path="/especie/:id" element={<SpeciesPage />} />
-        <Route path="/cuaderno" element={<Placeholder title="Cuaderno" />} />
-        <Route path="/jornada/:id" element={<Placeholder title="Jornada" />} />
+        <Route path="/cuaderno" element={<NotebookPage />} />
+        <Route path="/jornada/:id" element={<OutingPage />} />
         <Route path="/registrar" element={<Placeholder title="Registrar" />} />
-        <Route path="/captura/:id" element={<Placeholder title="Captura" />} />
+        <Route path="/captura/:id" element={<CatchPage />} />
         <Route path="/perfil" element={<Placeholder title="Perfil" />} />
         <Route path="/perfil/:userId" element={<Placeholder title="Perfil" />} />
       </Route>

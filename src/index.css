@@ -63,3 +63,15 @@ button { cursor: pointer; }
 .species-page .card { margin-bottom: 12px; }
 .card.legal.regulada { background: #fff6e0; border-color: #f2c14e; }
 .card.legal.protegida { background: #fbe9eb; border-color: #e3a3ab; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.check { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+fieldset.field { border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; }
+.tabs { display: flex; gap: 8px; margin: 16px 0 8px; }
+.active-outing { border-color: var(--accent); background: #fff8ec; }
+.active-outing p { margin: 4px 0 10px; }
+.outing-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+.photos { display: grid; gap: 8px; margin: 12px 0; }
+.photos img { width: 100%; border-radius: 12px; }
+.tag.warn { background: #fbe9eb; color: var(--danger); font-weight: 600; }
+.file-btn { margin: 8px 0 12px; }
+.card p { margin: 6px 0; }
