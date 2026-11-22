@@ -26,5 +26,6 @@ export default defineConfig({
       },
     }),
   ],
+  optimizeDeps: { include: ['piexifjs', 'browser-image-compression'] },
   test: { globals: true },
 });
