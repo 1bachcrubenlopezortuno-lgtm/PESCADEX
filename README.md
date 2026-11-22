@@ -57,11 +57,15 @@ update auth.users set encrypted_password = crypt('nueva-contraseña', gen_salt('
 
 ### 4. Publicar la app (gratis, con Netlify)
 
-1. Entra en <https://app.netlify.com>, **Add new site → Import an existing project** y elige este repositorio.
-2. Netlify detecta la configuración (`netlify.toml`). En **Environment variables** añade
-   `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`.
-3. Despliega. Te dará una dirección tipo `https://pescadex-xxx.netlify.app`.
-4. En Supabase, **Authentication → URL Configuration**, pon esa dirección como *Site URL*.
+1. Entra en <https://app.netlify.com> y regístrate con **GitHub**.
+2. **Add new project** → **Import an existing project** → **GitHub** → autoriza y elige este repositorio.
+3. En **Branch to deploy** elige la rama donde está la app.
+4. Deja la configuración de build como viene (sale de `netlify.toml`).
+5. Pulsa **Add environment variables** y añade dos:
+   - `VITE_SUPABASE_URL` = la *Project URL* de Supabase
+   - `VITE_SUPABASE_ANON_KEY` = la clave pública de Supabase (*anon public* o *Publishable key*)
+6. Pulsa **Deploy**. En 1–2 minutos tendrás una dirección tipo `https://algo.netlify.app`
+   (puedes cambiarla en **Project configuration → Change project name**).
 
 ### 5. Instalarla en el móvil
 
