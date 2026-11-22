@@ -31,6 +31,7 @@ haga gracia comparar Pescadex, niveles y récords.
 
 - Publicarla en App Store / Google Play.
 - Reconocimiento automático de especies por foto (posible ampliación futura, no ahora).
+- Retos semanales o de temporada (descartados por ahora).
 - Usuarios fuera del grupo, rankings públicos, monetización.
 - Cubrir especies fuera de Andalucía.
 
@@ -80,6 +81,20 @@ haga gracia comparar Pescadex, niveles y récords.
   sus propias capturas a esa jornada y todos reciben el XP de jornada.
 - **Especies reguladas** (mero, atún rojo, trucha común, besugo…): categoría "Regulada ⚠️";
   se pueden capturar y dan XP normal, pero al elegirlas se muestra aviso con la normativa.
+- **Tallas mínimas y captura y suelta**: cada ficha muestra la talla mínima legal; si la
+  medida registrada es inferior, aviso y pregunta "¿la has soltado?". Las capturas marcadas
+  como soltadas dan un bonus de XP (+20% de la base).
+- **Reacciones y comentarios** en capturas y jornadas (emojis + texto).
+- **Notificaciones push al grupo** (Web Push; en iOS requiere app instalada en inicio):
+  especie nueva desbloqueada, captura épica/legendaria, subida de nivel, comentario en una
+  captura propia. Cada usuario puede desactivarlas.
+- **Carta compartible**: imagen tipo carta de colección (foto, especie, rareza, peso/medida,
+  pescador y nivel) generada en el móvil, para compartir por WhatsApp (Web Share API).
+- **Ficha estilo Pokédex**: cada especie tiene una descripción corta con carácter, mejor
+  temporada (meses) y zonas/hábitat de Andalucía donde es más fácil.
+- **Estadísticas** personales y del grupo: mejores horas, mareas, fases lunares y zonas
+  por especie, a partir de las condiciones guardadas en las jornadas (fase 2).
+- **Mapa de sitios recomendados** con "zona visitada" (ver 8.8).
 
 ## 8. Diseño propuesto
 
@@ -185,6 +200,16 @@ haga gracia comparar Pescadex, niveles y récords.
   añade foto después, pasa a ser válida y da XP en ese momento (incluido el desbloqueo).
 - **Especies protegidas**: no se pueden elegir al registrar. La ficha dice "si la pescas
   por accidente, suéltala".
+
+### 8.8 Sitios recomendados y zonas visitadas
+
+- Capa del mapa con sitios de pesca recomendados (playas, espigones, escolleras, embalses,
+  tramos de río), cada uno con tipo, medio, especies habituales y breve descripción.
+- Al registrar una jornada dentro del radio de un sitio, este queda como **"zona visitada"**
+  para ese usuario (y suma a medallas tipo "explorador").
+- Origen de los sitios: PENDIENTE de decidir con el usuario.
+- No se incluyen zonas donde la pesca recreativa esté prohibida (reservas marinas integrales,
+  zonas de exclusión de parques naturales).
 
 ## 9. Lo que queda a criterio de quien lo construya
 
