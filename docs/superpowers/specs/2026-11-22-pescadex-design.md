@@ -1,6 +1,6 @@
 # Pescadex — Diseño
 
-Fecha: 2026-11-22 · Estado: borrador pendiente de aprobación
+Fecha: 2026-11-22 · Estado: pendiente de aprobación final
 
 ## 1. Intención y por qué
 
@@ -75,6 +75,11 @@ haga gracia comparar Pescadex, niveles y récords.
   guarda como registro personal, sin XP ni desbloqueo.
 - Tiempo, viento, marea y luna guardados automáticamente por jornada.
 - Plataforma: PWA.
+- **Clasificación** dentro del grupo: por nivel (XP), por % de Pescadex y récords por especie.
+- **Jornadas compartidas**: uno crea la jornada y etiqueta a los compañeros; cada uno añade
+  sus propias capturas a esa jornada y todos reciben el XP de jornada.
+- **Especies reguladas** (mero, atún rojo, trucha común, besugo…): categoría "Regulada ⚠️";
+  se pueden capturar y dan XP normal, pero al elegirlas se muestra aviso con la normativa.
 
 ## 8. Diseño propuesto
 
@@ -92,11 +97,11 @@ haga gracia comparar Pescadex, niveles y récords.
 - **profiles**: id (= auth user), nombre, avatar, fecha de alta.
 - **species** (catálogo, datos semilla): id, nombre común, nombre científico, medio
   (mar/dulce), familia/grupo, rareza (común, poco común, rara, épica, legendaria),
-  protegida (bool), descripción, notas (normativa, peligros), imagen/silueta.
+  estado legal (libre / regulada / protegida), texto de normativa, descripción, notas (normativa, peligros), imagen/silueta.
 - **outings** (jornadas): id, usuario, inicio, fin, modalidad (surfcasting, spinning,
-  barco, embalse, río, otra), acompañantes (lista de usuarios), nota, ubicación,
+  barco, embalse, río, otra), acompañantes etiquetados (lista de usuarios), nota, ubicación,
   condiciones (JSON: temperatura, viento, nubosidad, estado del mar, marea, fase lunar).
-- **catches** (capturas): id, jornada, usuario, especie, fecha/hora, peso (g, opcional),
+- **catches** (capturas): id, jornada (propia o en la que el usuario está etiquetado), usuario, especie, fecha/hora, peso (g, opcional),
   medida (cm, opcional), cebo/señuelo (opcional), nota, ubicación, compartir exacta (bool),
   fotos (1..n).
 - **Ubicación en dos niveles**: el punto exacto se guarda en una tabla/columnas que solo el
@@ -108,7 +113,8 @@ haga gracia comparar Pescadex, niveles y récords.
 
 ### 8.3 Reglas de juego
 
-- **Captura válida** = tiene al menos una foto y la especie no está protegida.
+- **Captura válida** = tiene al menos una foto y la especie no está protegida
+  (las reguladas sí cuentan).
 - **Desbloqueo**: una especie queda desbloqueada para un usuario con su primera captura
   válida de ella.
 - **% Pescadex** = especies desbloqueadas / especies no protegidas.
@@ -116,7 +122,9 @@ haga gracia comparar Pescadex, niveles y récords.
   - Captura válida: común 10 · poco común 25 · rara 50 · épica 100 · legendaria 250.
   - Primera captura de una especie: ×3.
   - Récord personal (supera su mayor peso o medida de esa especie): +50% de la base.
-  - Jornada registrada: +5 XP (aunque sea en blanco).
+  - Jornada: +5 XP al creador y a cada compañero etiquetado (aunque sea en blanco).
+    Las medallas de jornadas (en blanco, madrugador) cuentan también para los etiquetados;
+    "en blanco" = ese usuario no tuvo capturas en la jornada.
 - **Niveles**: curva creciente (p. ej. XP para nivel n ≈ 100·n^1.5). Títulos por tramos:
   Grumete → Pescador de espigón → Caña fina → Lobo de mar → Señor del Estrecho → Leyenda.
 - **Medallas** (lista inicial, ampliable): primera captura, primera especie de cada rareza,
@@ -131,16 +139,20 @@ haga gracia comparar Pescadex, niveles y récords.
 
 1. **Pescadex**: rejilla de especies; filtros mar/dulce, rareza, capturadas/no. Silueta si no
    capturada, candado si protegida. Ficha: info, rareza, normativa, mis capturas y récord,
-   y quién del grupo la tiene.
+   y quién del grupo la tiene. Las reguladas muestran ⚠️ y su normativa.
 2. **Registrar**: botón grande siempre visible. Flujo rápido: foto → especie (buscador) →
    datos opcionales → guardar. Ubicación por GPS automáticamente. Se asocia a la jornada
    en curso o crea una.
 3. **Cuaderno**: lista de jornadas (mías / del grupo), detalle con capturas y condiciones.
-   "Empezar jornada" / "Terminar jornada".
+   "Empezar jornada" / "Terminar jornada", etiquetar compañeros. Un compañero etiquetado
+   ve la jornada como suya y puede añadir capturas (también sin conexión, una vez la ha
+   recibido en su móvil).
 4. **Mapa**: mis capturas en punto exacto; las de los demás en zona aproximada (o exacta si
    la compartieron).
 5. **Grupo / feed**: últimas capturas y jornadas de los amigos.
-6. **Perfil** (propio y de los demás): avatar, nivel, barra de XP, título, % Pescadex,
+6. **Clasificación**: ranking del grupo por nivel/XP y por % de Pescadex, y tabla de
+   récords del grupo por especie (mayor peso y mayor medida, con quién y cuándo).
+7. **Perfil** (propio y de los demás): avatar, nivel, barra de XP, título, % Pescadex,
    medallas, récords, últimas capturas.
 
 ### 8.5 Cuentas y grupo
