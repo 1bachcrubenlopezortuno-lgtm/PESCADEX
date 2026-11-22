@@ -219,3 +219,9 @@ select { color-scheme: dark; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.btn.danger { background: linear-gradient(135deg, #ff6b7d, #e0405a); color: #fff; box-shadow: 0 6px 20px rgb(255 107 125 / 0.25); }
+.btn.ghost-danger { background: transparent; color: var(--danger); border: 1px solid rgb(255 107 125 / 0.45); box-shadow: none; }
+.confirm { border-color: rgb(255 107 125 / 0.5); background: rgb(255 107 125 / 0.08); margin: 12px 0; }
+.danger-zone { margin-top: 28px; }
+.row.stack { flex-direction: column; }

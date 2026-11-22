@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import type { Species } from '../catalog/types';
-import { addCatchPhoto, createCatch, listOutings, toGameCatch } from '../data/api';
+import { addCatchPhoto, createCatch, getOuting, listOutings, toGameCatch } from '../data/api';
 import { preparePhoto } from '../data/photo';
-import type { LatLng } from '../data/types';
+import type { LatLng, Outing } from '../data/types';
 import { levelInfo } from '../game/levels';
 import { catchXpEvents, totalXp, type GameCatch } from '../game/xp';
 import { useActiveOuting } from '../outings/useActiveOuting';
@@ -16,6 +16,13 @@ interface Result {
   catchId: string;
   messages: string[];
   warnings: string[];
+}
+
+/** 'YYYY-MM-DDTHH:mm' en hora local, para <input type="datetime-local">. */
+function toLocalInput(iso: string): string {
+  const d = new Date(iso);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 const toNumber = (v: string) => {
@@ -43,6 +50,22 @@ export function RegisterPage() {
   const { active, start } = useActiveOuting();
   const { catches: myCatches, reload } = useMyCatches(me);
   const { request } = useGeolocation();
+  const [params] = useSearchParams();
+  const targetId = params.get('jornada');
+  const [target, setTarget] = useState<Outing | null>(null);
+  const [caughtAtInput, setCaughtAtInput] = useState('');
+
+  useEffect(() => {
+    if (!targetId) return;
+    getOuting(targetId)
+      .then(({ outing }) => {
+        setTarget(outing);
+        setCaughtAtInput(toLocalInput(outing.startedAt));
+      })
+      .catch(() => setError('No se encontró la jornada.'));
+  }, [targetId]);
+  // Captura en una jornada que no es la que está en curso: no se usa el GPS de ahora.
+  const pastOuting = target !== null && !(active && active.id === target.id);
 
   const [catchId, setCatchId] = useState(() => crypto.randomUUID());
   const [files, setFiles] = useState<File[]>([]);
@@ -59,8 +82,8 @@ export function RegisterPage() {
   const locationRef = useRef<Promise<LatLng | null> | null>(null);
 
   useEffect(() => {
-    locationRef.current = request();
-  }, [request, catchId]);
+    locationRef.current = targetId ? null : request();
+  }, [request, catchId, targetId]);
 
   function reset() {
     setCatchId(crypto.randomUUID());
@@ -83,10 +106,11 @@ export function RegisterPage() {
     setError(null);
     try {
       const myOutings = await listOutings({ userId: me });
-      const location = (await locationRef.current) ?? null;
-      const outing = active ?? (await start({ mode: 'otra', companionIds: [], shareExact: false }, location));
+      if (targetId && !target) return;
+      const location = pastOuting ? null : ((await locationRef.current) ?? null);
+      const outing = target ?? active ?? (await start({ mode: 'otra', companionIds: [], shareExact: false }, location));
       const newOuting = !myOutings.some((o) => o.id === outing.id);
-      const caughtAt = new Date().toISOString();
+      const caughtAt = pastOuting && caughtAtInput ? new Date(caughtAtInput).toISOString() : new Date().toISOString();
       const kg = toNumber(weight);
       const weightG = kg ? Math.round(kg * 1000) : undefined;
       const lengthCm = toNumber(length);
@@ -113,7 +137,7 @@ export function RegisterPage() {
       } catch {
         warnings.push('La captura se guardó, pero no se pudo subir la foto. Añádela desde el detalle de la captura.');
       }
-      if (!location) warnings.push('📍 Sin ubicación: no se pudo obtener el GPS.');
+      if (!location && !pastOuting) warnings.push('📍 Sin ubicación: no se pudo obtener el GPS.');
 
       const before: GameCatch[] = myCatches.map(toGameCatch);
       const mine: GameCatch = { id: catchId, speciesId: species.id, caughtAt, photoCount: uploaded, weightG: weightG ?? null, lengthCm: lengthCm ?? null };
@@ -155,7 +179,19 @@ export function RegisterPage() {
   return (
     <form onSubmit={save}>
       <h1>Registrar captura</h1>
-      <p className="muted">{active ? 'Se añadirá a tu jornada en curso.' : 'Se creará una jornada nueva para esta captura.'}</p>
+      <p className="muted">
+        {target
+          ? `Se añadirá a la jornada del ${new Date(target.startedAt).toLocaleDateString('es-ES')}.`
+          : active
+            ? 'Se añadirá a tu jornada en curso.'
+            : 'Se creará una jornada nueva para esta captura.'}
+      </p>
+      {pastOuting && (
+        <label className="field">
+          Día y hora de la captura
+          <input type="datetime-local" value={caughtAtInput} onChange={(e) => setCaughtAtInput(e.target.value)} />
+        </label>
+      )}
 
       <label className="field">
         Fotos

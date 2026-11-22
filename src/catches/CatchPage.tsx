@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { SPECIES_BY_ID } from '../catalog/catalog';
 import { RARITY_LABEL } from '../catalog/types';
-import { addCatchPhoto, getCatch, listProfiles } from '../data/api';
+import { addCatchPhoto, deleteCatch, getCatch, listProfiles } from '../data/api';
+import { ConfirmBox } from '../ui/ConfirmBox';
 import { preparePhoto } from '../data/photo';
 import type { Catch, Profile } from '../data/types';
 import { formatDateTime, formatLength, formatWeight } from '../ui/format';
@@ -16,6 +17,8 @@ export function CatchPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const navigate = useNavigate();
 
   const load = useCallback(() => {
     getCatch(id).then(setC).catch(() => setError('No se encontró la captura.'));
@@ -69,6 +72,22 @@ export function CatchPage() {
         {c.note && <p>{c.note}</p>}
         <LocationLine exact={c.exact} approx={c.approx} />
       </div>
+      {mine && (
+        <div className="danger-zone">
+          {confirming ? (
+            <ConfirmBox
+              message="Se borrará esta captura y sus fotos. No se puede deshacer."
+              onCancel={() => setConfirming(false)}
+              onConfirm={async () => {
+                await deleteCatch(c.id);
+                navigate(`/jornada/${c.outingId}`, { replace: true });
+              }}
+            />
+          ) : (
+            <button className="btn ghost-danger block" onClick={() => setConfirming(true)}>Eliminar captura</button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

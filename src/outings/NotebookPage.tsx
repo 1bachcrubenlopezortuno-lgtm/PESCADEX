@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
-import { listCatches, listOutings, listProfiles } from '../data/api';
+import { createOuting, listCatches, listOutings, listProfiles } from '../data/api';
 import { OUTING_MODE_LABEL, type Catch, type Outing, type Profile } from '../data/types';
 import { formatDateTime } from '../ui/format';
+import { PastOutingForm } from './PastOutingForm';
 import { StartOutingForm } from './StartOutingForm';
 import { useActiveOuting } from './useActiveOuting';
 
@@ -15,7 +16,8 @@ export function NotebookPage() {
   const [outings, setOutings] = useState<Outing[]>([]);
   const [catches, setCatches] = useState<Catch[]>([]);
   const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState<'none' | 'start' | 'past'>('none');
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,17 +48,31 @@ export function NotebookPage() {
             {active.ownerId === me && <button className="btn secondary" onClick={() => void end()}>Terminar jornada</button>}
           </div>
         </div>
-      ) : showForm ? (
+      ) : form === 'start' ? (
         <StartOutingForm
           friends={profiles.filter((p) => p.id !== me)}
-          onCancel={() => setShowForm(false)}
+          onCancel={() => setForm('none')}
           onStart={async (i) => {
             await start(i);
-            setShowForm(false);
+            setForm('none');
           }}
         />
-      ) : (
-        <button className="btn block" onClick={() => setShowForm(true)}>Empezar jornada</button>
+      ) : null}
+      {form === 'past' && (
+        <PastOutingForm
+          friends={profiles.filter((p) => p.id !== me)}
+          onCancel={() => setForm('none')}
+          onSave={async (o) => {
+            await createOuting(o);
+            navigate(`/jornada/${o.id}`);
+          }}
+        />
+      )}
+      {form === 'none' && (
+        <div className="row stack">
+          {!active && <button className="btn block" onClick={() => setForm('start')}>Empezar jornada</button>}
+          <button className="btn secondary block" onClick={() => setForm('past')}>Apuntar jornada pasada</button>
+        </div>
       )}
 
       <div className="tabs">

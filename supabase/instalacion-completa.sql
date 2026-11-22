@@ -230,6 +230,20 @@ create policy "fotos: subir a la carpeta propia" on storage.objects for insert t
 create policy "fotos: borrar las propias" on storage.objects for delete to authenticated
   using (bucket_id = 'catch-photos' and (storage.foldername(name))[1] = auth.uid()::text);
 
+-- Una jornada solo se puede borrar si no tiene capturas de otros participantes:
+-- así nadie pierde sus peces porque el creador borre la jornada.
+create function public.protect_others_catches() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if exists (select 1 from public.catches where outing_id = old.id and user_id <> old.owner_id) then
+    raise exception 'outing_has_others_catches';
+  end if;
+  return old;
+end $$;
+
+create trigger outings_protect_others_catches before delete on public.outings
+for each row execute function public.protect_others_catches();
+
 -- Generado por scripts/gen-species-seed.ts a partir de src/catalog/species.json. No editar a mano.
 insert into public.species (id, common_name, rarity, legal) values
   ('barbo-gitano', 'Barbo gitano', 'comun', 'libre'),

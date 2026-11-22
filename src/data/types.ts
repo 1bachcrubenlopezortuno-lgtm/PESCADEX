@@ -65,6 +65,7 @@ export interface NewCatch {
 export interface NewOuting {
   id: string;
   startedAt: string;
+  endedAt?: string;
   mode: OutingMode;
   companionIds: string[];
   location: LatLng | null;

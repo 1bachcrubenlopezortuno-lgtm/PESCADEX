@@ -54,7 +54,7 @@ export async function listProfiles(): Promise<Profile[]> {
 // ---------- Jornadas ----------
 export async function createOuting(o: NewOuting): Promise<void> {
   const { error } = await supabase.from('outings').upsert(
-    { id: o.id, started_at: o.startedAt, mode: o.mode, note: o.note ?? null, share_exact: o.shareExact },
+    { id: o.id, started_at: o.startedAt, ended_at: o.endedAt ?? null, mode: o.mode, note: o.note ?? null, share_exact: o.shareExact },
     { onConflict: 'id', ignoreDuplicates: true },
   );
   fail(error);
@@ -68,6 +68,30 @@ export async function createOuting(o: NewOuting): Promise<void> {
     const { error: e3 } = await supabase.from('outing_locations').upsert({ outing_id: o.id, ...o.location });
     fail(e3);
   }
+}
+
+/** Borra las fotos propias del almacenamiento (las filas se borran en cascada). */
+async function removeMyPhotos(catchIds: string[]): Promise<void> {
+  if (!catchIds.length) return;
+  const uid = await currentUserId();
+  const { data } = await supabase.from('catch_photos').select('path').in('catch_id', catchIds);
+  const paths = (data ?? []).map((r: Row) => r.path as string).filter((p) => p.startsWith(`${uid}/`));
+  if (paths.length) await supabase.storage.from(PHOTO_BUCKET).remove(paths);
+}
+
+export async function deleteOuting(id: string): Promise<void> {
+  const uid = await currentUserId();
+  const { data } = await supabase.from('catches').select('id').eq('outing_id', id).eq('user_id', uid);
+  const ids = (data ?? []).map((r: Row) => r.id as string);
+  const { error } = await supabase.from('outings').delete().eq('id', id);
+  if (error) throw new Error(error.message.includes('outing_has_others_catches') ? 'outing_has_others_catches' : error.message);
+  await removeMyPhotos(ids).catch(() => {});
+}
+
+export async function deleteCatch(id: string): Promise<void> {
+  await removeMyPhotos([id]).catch(() => {});
+  const { error } = await supabase.from('catches').delete().eq('id', id);
+  fail(error);
 }
 
 export async function endOuting(id: string, endedAt: string): Promise<void> {
