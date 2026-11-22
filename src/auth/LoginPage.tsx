@@ -42,7 +42,12 @@ export function LoginPage() {
       <div className="auth-logo" aria-hidden="true">🎣</div>
       <h1>Pescadex</h1>
       <p className="muted">La Pokédex de pesca del grupo.</p>
-      {!supabaseConfigured && <p className="error">Falta configurar Supabase (ver README).</p>}
+      {!supabaseConfigured && (
+        <p className="error">
+          La app no encuentra Supabase: faltan las variables VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY en
+          Netlify. Añádelas y vuelve a desplegar (Deploys → Trigger deploy).
+        </p>
+      )}
       <form onSubmit={submit}>
         <label className="field">
           Email
