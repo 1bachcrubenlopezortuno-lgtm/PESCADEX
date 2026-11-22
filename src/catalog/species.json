@@ -1,0 +1,1728 @@
+[
+ {
+  "id": "barbo-gitano",
+  "commonName": "Barbo gitano",
+  "scientificName": "Luciobarbus sclateri",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "El rey de los ríos andaluces. Hocico con barbillas, cuerpo dorado y una pelea tozuda que no se rinde nunca.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Casi todos los ríos y embalses: Guadalquivir, Genil, Guadalete, Guadiaro."
+ },
+ {
+  "id": "barbo-comizo",
+  "commonName": "Barbo comizo",
+  "scientificName": "Luciobarbus comizo",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Pariente gigante del barbo, de cabeza alargada. Puede superar los 10 kg y se deja ver muy poco.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "zones": "Cuenca del Guadiana en Huelva y algunos embalses grandes."
+ },
+ {
+  "id": "boga-guadiana",
+  "commonName": "Boga del Guadiana",
+  "scientificName": "Pseudochondrostoma willkommii",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Plateada y nerviosa, raspa las algas de las piedras con su boca afilada. Remonta los ríos en primavera en grandes bancos.",
+  "bestMonths": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "zones": "Ríos del Guadalquivir y Guadiana con corriente."
+ },
+ {
+  "id": "cacho",
+  "commonName": "Cacho",
+  "scientificName": "Squalius pyrenaicus",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pequeño y voraz, ataca casi cualquier cebo. El primer pez de muchos pescadores de río.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Arroyos y ríos de toda Andalucía."
+ },
+ {
+  "id": "trucha-comun",
+  "commonName": "Trucha común",
+  "scientificName": "Salmo trutta",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Salmónidos",
+  "rarity": "epica",
+  "legal": "regulada",
+  "legalNote": "Solo en tramos y épocas autorizados (cotos y tramos trucheros), con cupo y talla mínima. Muchos tramos son de captura y suelta.",
+  "description": "Pintas rojas, aguas heladas y mucho recelo. Atraparla en un torrente de sierra es una prueba de paciencia y sigilo.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "zones": "Tramos altos de Sierra Nevada, Cazorla y Segura, Grazalema."
+ },
+ {
+  "id": "anguila",
+  "commonName": "Anguila",
+  "scientificName": "Anguilla anguilla",
+  "habitats": [
+   "dulce",
+   "mar"
+  ],
+  "group": "Anguílidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "Pesca prohibida en Andalucía. Si la pescas por accidente, suéltala.",
+  "description": "Nace en el mar de los Sargazos y cruza el Atlántico para vivir en nuestros ríos. Hoy está en peligro crítico.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Estuarios y ríos de Huelva, Cádiz y el bajo Guadalquivir."
+ },
+ {
+  "id": "sabalo",
+  "commonName": "Sábalo",
+  "scientificName": "Alosa alosa",
+  "habitats": [
+   "dulce",
+   "mar"
+  ],
+  "group": "Clupeidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "Especie protegida, pesca prohibida. Si la pescas por accidente, suéltala.",
+  "description": "Antiguo viajero que subía del mar al Guadalquivir para frezar. Hoy casi desaparecido.",
+  "bestMonths": [
+   3,
+   4,
+   5
+  ],
+  "zones": "Bajo Guadalquivir y estuarios atlánticos."
+ },
+ {
+  "id": "saboga",
+  "commonName": "Saboga",
+  "scientificName": "Alosa fallax",
+  "habitats": [
+   "dulce",
+   "mar"
+  ],
+  "group": "Clupeidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "Especie protegida, pesca prohibida. Si la pescas por accidente, suéltala.",
+  "description": "Hermana menor del sábalo, plateada y migradora. Escasa y protegida.",
+  "bestMonths": [
+   3,
+   4,
+   5
+  ],
+  "zones": "Bajo Guadalquivir y estuarios atlánticos."
+ },
+ {
+  "id": "jarabugo",
+  "commonName": "Jarabugo",
+  "scientificName": "Anaecypris hispanica",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "En peligro de extinción, pesca prohibida.",
+  "description": "Diminuto endemismo del Guadiana, uno de los peces más amenazados de Europa.",
+  "bestMonths": [
+   4,
+   5,
+   6
+  ],
+  "zones": "Arroyos de la cuenca del Guadiana."
+ },
+ {
+  "id": "calandino",
+  "commonName": "Calandino",
+  "scientificName": "Squalius alburnoides",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "Especie protegida, pesca prohibida.",
+  "description": "Pececillo plateado de arroyos con una genética única en el mundo.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "zones": "Arroyos del Guadalquivir y Guadiana."
+ },
+ {
+  "id": "colmilleja",
+  "commonName": "Colmilleja",
+  "scientificName": "Cobitis paludica",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Cobítidos",
+  "rarity": "legendaria",
+  "legal": "protegida",
+  "legalNote": "Especie protegida, pesca prohibida.",
+  "description": "Pequeña loche que vive enterrada en la arena del fondo y solo asoma la cabeza.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "zones": "Ríos y arroyos con fondo de arena."
+ },
+ {
+  "id": "lisas",
+  "commonName": "Lisas y mújoles",
+  "scientificName": "Chelon spp. / Mugil cephalus",
+  "habitats": [
+   "dulce",
+   "mar"
+  ],
+  "group": "Mugílidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Bancos de lomos grises que suben ríos y rondan los puertos. Desconfiadas y con boca de seda: fáciles de ver, difíciles de clavar.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos, estuarios y tramos bajos de todos los ríos."
+ },
+ {
+  "id": "black-bass",
+  "commonName": "Black bass",
+  "scientificName": "Micropterus salmoides",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Centrárquidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Boca enorme y saltos espectaculares. El depredador estrella de los embalses y el rey del spinning de agua dulce.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Embalses de toda Andalucía: Iznájar, Arcos, Bornos, La Breña."
+ },
+ {
+  "id": "carpa",
+  "commonName": "Carpa común",
+  "scientificName": "Cyprinus carpio",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Fuerte, lista y enorme: puede pasar de 15 kg. Las sesiones de noche esperando su carrera son legendarias.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Embalses, canales y tramos lentos del Guadalquivir."
+ },
+ {
+  "id": "carpin",
+  "commonName": "Carpín",
+  "scientificName": "Carassius gibelio",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Primo pequeño de la carpa, sin barbillas y muy resistente. Pica con facilidad.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Embalses, canales y charcas."
+ },
+ {
+  "id": "tenca",
+  "commonName": "Tenca",
+  "scientificName": "Tinca tinca",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Verde oliva y ojos rojos. Vive tranquila entre la vegetación de aguas quietas.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "zones": "Charcas y embalses con vegetación."
+ },
+ {
+  "id": "lucio",
+  "commonName": "Lucio",
+  "scientificName": "Esox lucius",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Esócidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "El cocodrilo del agua dulce. Emboscado entre las algas, ataca como un rayo.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   10,
+   11,
+   12
+  ],
+  "zones": "Algunos embalses de Jaén y Córdoba."
+ },
+ {
+  "id": "lucioperca",
+  "commonName": "Lucioperca",
+  "scientificName": "Sander lucioperca",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Pércidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Depredador de ojos vidriosos que caza en penumbra. Escaso y muy buscado.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   10,
+   11,
+   12
+  ],
+  "zones": "Algunos embalses del interior."
+ },
+ {
+  "id": "siluro",
+  "commonName": "Siluro",
+  "scientificName": "Silurus glanis",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Silúridos",
+  "rarity": "legendaria",
+  "legal": "libre",
+  "description": "Un monstruo bigotudo que puede superar los dos metros. Encontrarte con uno es una historia para toda la vida.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Presencia puntual en grandes embalses y ríos; en expansión."
+ },
+ {
+  "id": "pez-sol",
+  "commonName": "Pez sol",
+  "scientificName": "Lepomis gibbosus",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Centrárquidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pequeño, redondo y de colores de feria. Pica sin parar en cualquier orilla de embalse.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Casi todos los embalses y ríos lentos."
+ },
+ {
+  "id": "alburno",
+  "commonName": "Alburno",
+  "scientificName": "Alburnus alburnus",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pez plateado de superficie que va en enormes bancos. Cebo vivo favorito de los depredadores.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Embalses del Guadalquivir."
+ },
+ {
+  "id": "gobio",
+  "commonName": "Gobio",
+  "scientificName": "Gobio lozanoi",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ciprínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pequeño pez de fondo con barbillas, vive pegado a la grava.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Ríos con fondo de grava."
+ },
+ {
+  "id": "pez-gato",
+  "commonName": "Pez gato negro",
+  "scientificName": "Ameiurus melas",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Ictalúridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Bigotes largos y espinas que pinchan. Activo sobre todo de noche.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Embalses y canales."
+ },
+ {
+  "id": "trucha-arcoiris",
+  "commonName": "Trucha arcoíris",
+  "scientificName": "Oncorhynchus mykiss",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Salmónidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Franja rosada y mucha energía. Llega de piscifactoría a los cotos intensivos.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   10,
+   11,
+   12
+  ],
+  "zones": "Cotos intensivos de Granada, Jaén y Málaga."
+ },
+ {
+  "id": "gambusia",
+  "commonName": "Gambusia",
+  "scientificName": "Gambusia holbrooki",
+  "habitats": [
+   "dulce"
+  ],
+  "group": "Pecílidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pececillo diminuto que come larvas de mosquito. Pieza de colección para los completistas.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Charcas, acequias y remansos."
+ },
+ {
+  "id": "dorada",
+  "commonName": "Dorada",
+  "scientificName": "Sparus aurata",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Ceja dorada entre los ojos y mandíbulas capaces de partir mejillones. La reina del surfcasting.",
+  "bestMonths": [
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Playas, escolleras y caños de Cádiz y Huelva; bahía de Cádiz."
+ },
+ {
+  "id": "sargo",
+  "commonName": "Sargo común",
+  "scientificName": "Diplodus sargus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Rayas negras y mucho carácter. Le gusta la espuma de las rompientes contra la roca.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   10,
+   11,
+   12
+  ],
+  "zones": "Escolleras y zonas de roca de toda la costa."
+ },
+ {
+  "id": "sargo-picudo",
+  "commonName": "Sargo picudo",
+  "scientificName": "Diplodus puntazzo",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Hocico afilado y bandas oscuras. Más listo que su primo común.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   10,
+   11,
+   12
+  ],
+  "zones": "Roca y escolleras, sobre todo en el Estrecho y Málaga."
+ },
+ {
+  "id": "sargo-breado",
+  "commonName": "Sargo breado",
+  "scientificName": "Diplodus cervinus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "El gigante de los sargos, con anchas bandas color brea. Vive en roca profunda.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Fondos rocosos del Estrecho y Almería."
+ },
+ {
+  "id": "mojarra",
+  "commonName": "Mojarra",
+  "scientificName": "Diplodus vulgaris",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Dos manchas negras como un collar. Abundante y peleona para su tamaño.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos, escolleras y roca de toda la costa."
+ },
+ {
+  "id": "raspallon",
+  "commonName": "Raspallón",
+  "scientificName": "Diplodus annularis",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pequeño, con un anillo negro en la cola. Roba los cebos con una habilidad insultante.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Praderas y puertos del Mediterráneo y el Estrecho."
+ },
+ {
+  "id": "herrera",
+  "commonName": "Herrera",
+  "scientificName": "Lithognathus mormyrus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Rayas verticales y hocico de excavadora: busca gusanos en la arena de las playas.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Playas de arena de Huelva, Cádiz y Málaga."
+ },
+ {
+  "id": "salema",
+  "commonName": "Salema",
+  "scientificName": "Sarpa salpa",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Rayas doradas y dieta vegetariana. Va en bancos ramoneando las algas.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "zones": "Roca y escolleras de toda la costa."
+ },
+ {
+  "id": "oblada",
+  "commonName": "Oblada",
+  "scientificName": "Oblada melanura",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Ojos grandes y una mancha negra en la cola. Patrulla la superficie a media agua.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Escolleras y puertos."
+ },
+ {
+  "id": "boga",
+  "commonName": "Boga",
+  "scientificName": "Boops boops",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Ojos enormes y siempre en grupo. Si hay bogas, hay ambiente.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos y espigones de toda la costa."
+ },
+ {
+  "id": "chopa",
+  "commonName": "Chopa",
+  "scientificName": "Spondyliosoma cantharus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Gris azulada con líneas doradas. Se acerca a la costa en primavera.",
+  "bestMonths": [
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "zones": "Fondos mixtos de roca y arena."
+ },
+ {
+  "id": "breca",
+  "commonName": "Breca",
+  "scientificName": "Pagellus erythrinus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Rosada con puntitos azules. Un bocado muy fino que se pesca desde barco.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos de arena y fango desde barco."
+ },
+ {
+  "id": "aligote",
+  "commonName": "Aligote",
+  "scientificName": "Pagellus acarne",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Rosado con una mancha negra en la base de la aleta. Pica en abundancia de noche.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Playas y bocanas de Cádiz y Málaga."
+ },
+ {
+  "id": "besugo",
+  "commonName": "Besugo / Voraz",
+  "scientificName": "Pagellus bogaraveo",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "rara",
+  "legal": "regulada",
+  "legalNote": "En el Estrecho su pesca está muy regulada (temporadas, cupos y licencias específicas). Consulta la normativa vigente.",
+  "description": "Ojos grandes para ver en las profundidades del Estrecho. Un clásico de Tarifa y Algeciras.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   10,
+   11,
+   12
+  ],
+  "zones": "Estrecho de Gibraltar desde barco, a mucha profundidad."
+ },
+ {
+  "id": "pargo",
+  "commonName": "Pargo",
+  "scientificName": "Pagrus pagrus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Rosado con reflejos azules. Pelea fuerte y vive en fondos de roca.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos rocosos desde barco y roca profunda."
+ },
+ {
+  "id": "urta",
+  "commonName": "Urta",
+  "scientificName": "Pagrus auriga",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "epica",
+  "legal": "libre",
+  "description": "Bandas rojizas y dientes para triturar cangrejos. El pez más deseado de la costa gaditana.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Roca y bajos de Cádiz: Rota, Chipiona, Conil, Barbate."
+ },
+ {
+  "id": "denton",
+  "commonName": "Dentón",
+  "scientificName": "Dentex dentex",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "epica",
+  "legal": "libre",
+  "description": "Colmillos de lobo y fuerza bruta. Un trofeo para cualquier pescador mediterráneo.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos rocosos de Málaga, Granada y Almería."
+ },
+ {
+  "id": "sama",
+  "commonName": "Sama",
+  "scientificName": "Dentex gibbosus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Espáridos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Los machos llevan una joroba en la frente. Vive en fondos profundos de roca.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos rocosos profundos desde barco."
+ },
+ {
+  "id": "lubina",
+  "commonName": "Lubina / Róbalo",
+  "scientificName": "Dicentrarchus labrax",
+  "habitats": [
+   "mar",
+   "dulce"
+  ],
+  "group": "Morónidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Plateada, astuta y cazadora entre la espuma. El trofeo clásico del spinning en la costa.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   10,
+   11,
+   12
+  ],
+  "zones": "Escolleras, desembocaduras y playas con mar movida de toda la costa."
+ },
+ {
+  "id": "baila",
+  "commonName": "Baila",
+  "scientificName": "Dicentrarchus punctatus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Morónidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Hermana pintada de la lubina. Abunda en estuarios y caños.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Estuarios y caños de Huelva y Cádiz."
+ },
+ {
+  "id": "corvina",
+  "commonName": "Corvina",
+  "scientificName": "Argyrosomus regius",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Esciénidos",
+  "rarity": "epica",
+  "legal": "libre",
+  "description": "Puede superar los 30 kg y \"ronca\" bajo el agua. Un gigante de las desembocaduras atlánticas.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "zones": "Desembocaduras del Guadalquivir, Guadiana y Tinto-Odiel; playas de Huelva y Cádiz."
+ },
+ {
+  "id": "verrugato",
+  "commonName": "Verrugato",
+  "scientificName": "Umbrina cirrosa",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Esciénidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Barbilla corta y rayas doradas. Ronda las playas de arena al atardecer.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Playas de arena y desembocaduras."
+ },
+ {
+  "id": "lenguado",
+  "commonName": "Lenguado",
+  "scientificName": "Solea solea",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Pleuronectiformes",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Plano, con los dos ojos en el mismo lado. Se camufla en la arena como un fantasma.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   10,
+   11,
+   12
+  ],
+  "zones": "Playas de arena y fango, caños y estuarios."
+ },
+ {
+  "id": "salmonete",
+  "commonName": "Salmonete de roca",
+  "scientificName": "Mullus surmuletus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Múlidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Rojo intenso y dos barbillas que rebuscan en el fondo. Un manjar.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos de arena junto a roca."
+ },
+ {
+  "id": "serrano",
+  "commonName": "Serrano",
+  "scientificName": "Serranus cabrilla",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Serránidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pequeño depredador de rayas pardas. Ataca cualquier cosa que se mueva.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Fondos rocosos y praderas."
+ },
+ {
+  "id": "vaquilla",
+  "commonName": "Vaquilla",
+  "scientificName": "Serranus scriba",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Serránidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Garabatos azules en la cara, como si alguien la hubiera escrito. Muy curiosa.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Roca y praderas del Mediterráneo."
+ },
+ {
+  "id": "mero",
+  "commonName": "Mero",
+  "scientificName": "Epinephelus marginatus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Serránidos",
+  "rarity": "legendaria",
+  "legal": "regulada",
+  "legalNote": "Muy regulado: talla mínima alta y vedas o prohibiciones según la zona (prohibido en reservas marinas). Consulta la normativa antes de quedártelo.",
+  "description": "Señor de las cuevas. Grande, longevo y territorial: un símbolo del Mediterráneo.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Fondos rocosos del Estrecho y del Mediterráneo andaluz."
+ },
+ {
+  "id": "cabracho",
+  "commonName": "Cabracho",
+  "scientificName": "Scorpaena scrofa",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escorpénidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Rojo, con espinas venenosas y cara de pocos amigos. Delicioso, pero cuidado al tocarlo.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Fondos rocosos desde barco."
+ },
+ {
+  "id": "rascacio",
+  "commonName": "Rascacio",
+  "scientificName": "Scorpaena porcus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escorpénidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Maestro del camuflaje entre las rocas. Sus espinas pican de verdad.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Roca y escolleras."
+ },
+ {
+  "id": "pez-arana",
+  "commonName": "Pez araña",
+  "scientificName": "Trachinus draco",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Traquínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Se entierra en la arena con solo los ojos fuera. Su espina dorsal es muy venenosa: ¡ojo al desanzuelar!",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Playas de arena de toda la costa."
+ },
+ {
+  "id": "congrio",
+  "commonName": "Congrio",
+  "scientificName": "Conger conger",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Cóngridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Serpiente gris de las grietas, fuerte como un cabo de amarre. Sale de noche.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Escolleras, puertos y roca de noche."
+ },
+ {
+  "id": "morena",
+  "commonName": "Morena",
+  "scientificName": "Muraena helena",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Murénidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Piel moteada y mandíbulas de pesadilla. Defiende su agujero en la roca.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Roca y escolleras."
+ },
+ {
+  "id": "pez-ballesta",
+  "commonName": "Pez ballesta",
+  "scientificName": "Balistes capriscus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Balístidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Piel de cuero y una espina que se bloquea como un gatillo. Ladrón de cebos profesional.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Puertos y roca en verano."
+ },
+ {
+  "id": "pejerrey",
+  "commonName": "Pejerrey",
+  "scientificName": "Atherina presbyter",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Aterínidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Diminuto, transparente y con una franja plateada. Va en bancos enormes en los puertos.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos y dársenas."
+ },
+ {
+  "id": "doncella",
+  "commonName": "Doncella",
+  "scientificName": "Coris julis",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Lábridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Colores de arcoíris y una franja en zigzag. Muy curiosa con los cebos.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Roca y praderas del Mediterráneo y el Estrecho."
+ },
+ {
+  "id": "fredi",
+  "commonName": "Fredi / Pez verde",
+  "scientificName": "Thalassoma pavo",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Lábridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Verde turquesa con rayas azules: el pez más tropical de nuestra costa.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Roca somera, sobre todo en el Estrecho y Málaga."
+ },
+ {
+  "id": "raya",
+  "commonName": "Raya",
+  "scientificName": "Raja spp.",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Rájidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Plana como una alfombra y con cola espinosa. Planea sobre los fondos de arena.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   10,
+   11,
+   12
+  ],
+  "zones": "Playas y fondos de arena, de noche."
+ },
+ {
+  "id": "caballa",
+  "commonName": "Caballa",
+  "scientificName": "Scomber colias",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escómbridos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Lomo verde atigrado y velocidad de bala. Cuando entra el banco, no para de picar.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Puertos, espigones y desde barco en toda la costa."
+ },
+ {
+  "id": "jurel",
+  "commonName": "Jurel",
+  "scientificName": "Trachurus spp.",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Carángidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Una línea de escudos le recorre el costado. Pica en bancos, sobre todo de noche.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos y espigones."
+ },
+ {
+  "id": "anjova",
+  "commonName": "Anjova",
+  "scientificName": "Pomatomus saltatrix",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Pomatómidos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Dientes como cuchillas y hambre insaciable. Cuidado con los dedos.",
+  "bestMonths": [
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "zones": "Playas, escolleras y desembocaduras de Huelva y Cádiz."
+ },
+ {
+  "id": "palometa-blanca",
+  "commonName": "Palometa blanca",
+  "scientificName": "Trachinotus ovatus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Carángidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Plateada y con aletas en forma de hoz. Recorre las rompientes en verano.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Playas y rompientes."
+ },
+ {
+  "id": "lecha",
+  "commonName": "Lecha / Palometón",
+  "scientificName": "Lichia amia",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Carángidos",
+  "rarity": "epica",
+  "legal": "libre",
+  "description": "Un depredador musculoso que persigue a las lisas hasta la orilla. Arrancadas brutales.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Desembocaduras y playas de Cádiz y Málaga."
+ },
+ {
+  "id": "pez-limon",
+  "commonName": "Pez limón",
+  "scientificName": "Seriola dumerili",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Carángidos",
+  "rarity": "epica",
+  "legal": "libre",
+  "description": "Franja amarilla y potencia de toro. Romperá tu línea si te descuidas.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Bajos rocosos desde barco, Estrecho y Mediterráneo."
+ },
+ {
+  "id": "bonito",
+  "commonName": "Bonito",
+  "scientificName": "Sarda sarda",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escómbridos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Rayas oblicuas en el lomo y velocidad de atún en miniatura.",
+  "bestMonths": [
+   8,
+   9,
+   10,
+   11
+  ],
+  "zones": "Desde barco y espigones largos, Estrecho y Mediterráneo."
+ },
+ {
+  "id": "melva",
+  "commonName": "Melva",
+  "scientificName": "Auxis rochei",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escómbridos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Pequeño túnido de lomo atigrado que llega en bancos al final del verano.",
+  "bestMonths": [
+   8,
+   9,
+   10,
+   11
+  ],
+  "zones": "Desde barco y espigones en el Mediterráneo."
+ },
+ {
+  "id": "barracuda",
+  "commonName": "Barracuda / Espetón",
+  "scientificName": "Sphyraena spp.",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Esfirénidos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Cuerpo de flecha y dientes de aguja. Caza a toda velocidad cerca de la superficie.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "zones": "Puertos y escolleras, sobre todo Málaga y Almería."
+ },
+ {
+  "id": "aguja",
+  "commonName": "Aguja",
+  "scientificName": "Belone belone",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Belónidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Pico larguísimo y espinas verdes. Salta fuera del agua al clavarla.",
+  "bestMonths": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "zones": "Superficie en puertos y escolleras."
+ },
+ {
+  "id": "pez-sable",
+  "commonName": "Pez sable",
+  "scientificName": "Lepidopus caudatus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Triquiúridos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Una cinta plateada como una espada. Sube de las profundidades de noche.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   10,
+   11,
+   12
+  ],
+  "zones": "Estrecho y bahía de Algeciras, de noche."
+ },
+ {
+  "id": "atun-rojo",
+  "commonName": "Atún rojo",
+  "scientificName": "Thunnus thynnus",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Escómbridos",
+  "rarity": "legendaria",
+  "legal": "regulada",
+  "legalNote": "Pesca recreativa solo con autorización específica y normalmente en captura y suelta obligatoria. Consulta la normativa vigente.",
+  "description": "El gigante del Estrecho: cientos de kilos de músculo y siglos de historia en las almadrabas.",
+  "bestMonths": [
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "zones": "Estrecho de Gibraltar y costa de Cádiz, desde barco."
+ },
+ {
+  "id": "pez-espada",
+  "commonName": "Pez espada",
+  "scientificName": "Xiphias gladius",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Xífidos",
+  "rarity": "legendaria",
+  "legal": "libre",
+  "description": "Su espada corta bancos enteros de peces. Un sueño para pescadores de altura.",
+  "bestMonths": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "zones": "Aguas abiertas del Estrecho y Mediterráneo, desde barco."
+ },
+ {
+  "id": "pulpo",
+  "commonName": "Pulpo",
+  "scientificName": "Octopus vulgaris",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Cefalópodos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Ocho brazos, tres corazones y una inteligencia sorprendente. Maestro de la fuga.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   10,
+   11,
+   12
+  ],
+  "zones": "Roca, puertos y escolleras."
+ },
+ {
+  "id": "choco",
+  "commonName": "Choco / Sepia",
+  "scientificName": "Sepia officinalis",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Cefalópodos",
+  "rarity": "poco_comun",
+  "legal": "libre",
+  "description": "Cambia de color en un parpadeo. Llega a la costa en primavera a poner sus huevos.",
+  "bestMonths": [
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "zones": "Bahía de Cádiz, puertos y praderas."
+ },
+ {
+  "id": "calamar",
+  "commonName": "Calamar",
+  "scientificName": "Loligo vulgaris",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Cefalópodos",
+  "rarity": "rara",
+  "legal": "libre",
+  "description": "Se pesca de noche con poteras bajo las luces. Rápido y escurridizo.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   10,
+   11,
+   12
+  ],
+  "zones": "Puertos y espigones iluminados de noche."
+ }
+]
