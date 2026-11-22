@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest run --project unit",
     "test:browser": "vitest run --project browser",
-    "test:db": "supabase test db",
+    "test:db": "scripts/test-db.sh",
     "gen:seed": "tsx scripts/gen-species-seed.ts"
   },
   "dependencies": {
