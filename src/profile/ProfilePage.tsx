@@ -77,7 +77,7 @@ export function ProfilePage() {
           <div className="xp-bar"><div style={{ width: `${Math.round((100 * lvl.xpIntoLevel) / lvl.xpForNext)}%` }} /></div>
           <p className="muted small">{`${lvl.xpIntoLevel}/${lvl.xpForNext} XP`}</p>
           <p>{`Pescadex: ${progress.unlocked}/${progress.total} (${progress.percent}%)`}</p>
-          <p className="muted small">{outings.length} jornadas · {catches.length} capturas</p>
+          <p className="muted small">{outings.length} {outings.length === 1 ? 'jornada' : 'jornadas'} · {catches.length} {catches.length === 1 ? 'captura' : 'capturas'}</p>
         </div>
       </div>
 
