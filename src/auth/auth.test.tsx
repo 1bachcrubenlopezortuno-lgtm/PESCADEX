@@ -1,25 +1,19 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import { authMock, backend, asMember } from '../test/mockBackend';
+import { authMock, backend, asMember, resetBackend } from '../test/mockBackend';
 import { renderApp } from '../test/renderApp';
 
 vi.mock('../data/supabase', async () => {
   const { authMock } = await import('../test/mockBackend');
   return { supabase: { auth: authMock }, supabaseConfigured: true };
 });
-const joinGroup = vi.fn();
-vi.mock('../data/api', async () => {
-  const { backend } = await import('../test/mockBackend');
-  return {
-    getMyProfile: async () => backend.profile,
-    joinGroup: (...a: unknown[]) => joinGroup(...a),
-  };
-});
+vi.mock('../data/api', async () => (await import('../test/mockBackend')).apiMock());
+import * as api from '../data/api';
+const joinGroup = vi.mocked(api.joinGroup);
 
 beforeEach(() => {
-  backend.session = null;
-  backend.profile = null;
+  resetBackend();
   vi.clearAllMocks();
 });
 

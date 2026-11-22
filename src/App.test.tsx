@@ -7,10 +7,7 @@ vi.mock('./data/supabase', async () => {
   const { authMock } = await import('./test/mockBackend');
   return { supabase: { auth: authMock }, supabaseConfigured: true };
 });
-vi.mock('./data/api', async () => {
-  const { backend } = await import('./test/mockBackend');
-  return { getMyProfile: async () => backend.profile, joinGroup: async () => {} };
-});
+vi.mock('./data/api', async () => (await import('./test/mockBackend')).apiMock());
 
 test('muestra la barra inferior con las cuatro secciones', async () => {
   asMember();

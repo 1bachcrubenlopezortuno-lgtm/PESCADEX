@@ -45,3 +45,21 @@ button { cursor: pointer; }
 .tab.primary .tab-icon { background: var(--accent); border-radius: 50%; width: 44px; height: 44px; display: grid; place-items: center; margin-top: -18px; box-shadow: 0 2px 6px rgb(0 0 0 / 0.2); }
 .auth-page { padding-top: 48px; max-width: 420px; }
 .auth-logo { font-size: 3rem; }
+.pescadex-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.progress { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.progress-bar { width: 120px; height: 10px; border-radius: 999px; background: #e2dccd; overflow: hidden; }
+.progress-bar > div { height: 100%; background: var(--accent); }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.filters select { padding: 6px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); }
+.chip { border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 6px 12px; }
+.chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+.species-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+.species-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px 8px; background: var(--surface); border: 2px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); text-align: center; }
+.species-card.locked { background: #ece8de; }
+.species-num { position: absolute; top: 4px; left: 6px; font-size: 0.65rem; color: var(--muted); }
+.species-badge { position: absolute; top: 2px; right: 4px; font-size: 0.8rem; }
+.species-name { font-size: 0.78rem; font-weight: 600; line-height: 1.1; }
+.species-hero { display: flex; gap: 16px; align-items: center; margin: 12px 0; padding: 12px; border: 2px solid var(--border); border-radius: 16px; background: var(--surface); }
+.species-page .card { margin-bottom: 12px; }
+.card.legal.regulada { background: #fff6e0; border-color: #f2c14e; }
+.card.legal.protegida { background: #fbe9eb; border-color: #e3a3ab; }
