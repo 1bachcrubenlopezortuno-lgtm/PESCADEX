@@ -25,51 +25,35 @@ inicio del móvil, tanto en iPhone como en Android. No hace falta pasar por ning
    VITE_SUPABASE_ANON_KEY=eyJ...
    ```
 
-### 2. Crear las tablas
+### 2. Crear las tablas, las especies y el código de invitación
 
-Opción A (con la terminal):
-
-```bash
-npx supabase login
-npx supabase link --project-ref <tu-ref>
-npx supabase db push
-```
-
-Opción B (sin terminal): en el panel de Supabase, abre **SQL Editor** y ejecuta el contenido de
-`supabase/migrations/20261122000000_init.sql`.
-
-Después, en el **SQL Editor**, ejecuta también:
-
-1. El contenido de `supabase/seed.sql` (carga las especies).
-2. El código de invitación del grupo. **Usa un código largo y aleatorio** (por ejemplo, el que
-   genera la propia consulta): quien lo tenga puede ver las fotos y zonas del grupo.
+1. Abre `supabase/instalacion-completa.sql` en GitHub, pulsa **Raw** y copia todo el texto.
+2. En Supabase: **SQL Editor** → **New query** → pega → **Run**.
+3. Abajo aparece el **código de invitación** del grupo (un texto aleatorio). Apúntalo y pásaselo
+   solo a tus amigos: quien lo tenga puede ver las fotos y zonas del grupo.
+   Si se filtra, genera otro ejecutando:
 
    ```sql
-   insert into app_config (id, invite_code) values (1, encode(gen_random_bytes(9), 'base64'))
-   on conflict (id) do update set invite_code = excluded.invite_code
-   returning invite_code;
+   update app_config set invite_code = encode(gen_random_bytes(9), 'base64') where id = 1 returning invite_code;
    ```
 
-   Apunta el código que devuelve y pásaselo solo a tus amigos. Si se filtra, vuelve a
-   ejecutar la consulta para generar otro.
+> Si modificas el catálogo o la migración, regenera ese archivo (`npm run gen:seed` y vuelve a
+> juntar `supabase/migrations/*.sql` + `supabase/seed.sql`).
 
-### 3. Configurar el inicio de sesión con código
+### 3. Entrar con email y contraseña (sin emails)
 
-En **Authentication → Sign In / Providers → Email**: deja activado *Email* y desactiva
-*Confirm email* si quieres que el primer acceso sea inmediato.
+La app usa **email + contraseña** y no envía ningún correo. Solo hay que desactivar la confirmación:
 
-En **Authentication → Email Templates → Magic Link**, cambia el cuerpo para que envíe el
-código de 6 dígitos (la app no usa enlaces, porque en iPhone abren Safari en lugar de la app):
+1. Supabase → icono **Authentication** (barra izquierda) → **Sign In / Providers**.
+2. Pulsa **Email**.
+3. Desactiva el interruptor **Confirm email** y pulsa **Save**.
 
-```html
-<h2>Tu código para Pescadex</h2>
-<p>Introduce este código en la app: <strong>{{ .Token }}</strong></p>
+**Si alguien olvida su contraseña**, cámbiasela tú desde **SQL Editor** (no borres el usuario: se
+borrarían también todas sus capturas):
+
+```sql
+update auth.users set encrypted_password = crypt('nueva-contraseña', gen_salt('bf')) where email = 'amigo@email.com';
 ```
-
-Haz lo mismo en la plantilla **Confirm signup**.
-
-> El servicio de correo gratuito de Supabase permite pocos emails por hora. Para un grupo de
-> amigos sobra, pero si alguno no recibe el código, que espere unos minutos.
 
 ### 4. Publicar la app (gratis, con Netlify)
 
@@ -84,8 +68,8 @@ Haz lo mismo en la plantilla **Confirm signup**.
 - **iPhone:** abre el enlace en **Safari** → botón Compartir → **Añadir a pantalla de inicio**.
 - **Android:** abre el enlace en **Chrome** → menú ⋮ → **Instalar aplicación**.
 
-Pasa el enlace y el código de invitación a tus amigos. Cada uno entra con su email, recibe un
-código, se une con el código de invitación ¡y a pescar!
+Pasa el enlace y el código de invitación a tus amigos. Cada uno crea su cuenta con email y
+contraseña, se une con el código de invitación ¡y a pescar!
 
 ---
 

@@ -39,8 +39,8 @@ export function resetBackend() {
 export const authMock = {
   getSession: vi.fn(async () => ({ data: { session: backend.session }, error: null })),
   onAuthStateChange: vi.fn(() => ({ data: { subscription: { unsubscribe() {} } } })),
-  signInWithOtp: vi.fn(async () => ({ data: {}, error: null })),
-  verifyOtp: vi.fn(async () => ({ data: {}, error: null })),
+  signInWithPassword: vi.fn(async (): Promise<{ data: unknown; error: null | { message: string } }> => ({ data: {}, error: null })),
+  signUp: vi.fn(async (): Promise<{ data: { session: unknown }; error: null | { message: string } }> => ({ data: { session: {} }, error: null })),
   signOut: vi.fn(async () => ({ error: null })),
 };
 

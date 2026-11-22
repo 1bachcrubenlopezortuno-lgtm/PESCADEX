@@ -17,16 +17,40 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-test('sin sesión manda a /login, pide email y luego el código', async () => {
+test('sin sesión manda a /login y entra con email y contraseña', async () => {
   renderApp('/');
-  const email = await screen.findByLabelText('Email');
-  await userEvent.type(email, 'ana@x.es');
-  await userEvent.click(screen.getByRole('button', { name: 'Enviarme un código' }));
-  expect(authMock.signInWithOtp).toHaveBeenCalledWith({ email: 'ana@x.es', options: { shouldCreateUser: true } });
-  const code = await screen.findByLabelText('Código de 6 dígitos');
-  await userEvent.type(code, '123456');
+  await userEvent.type(await screen.findByLabelText('Email'), 'ana@x.es');
+  await userEvent.type(screen.getByLabelText('Contraseña'), 'secreta1');
   await userEvent.click(screen.getByRole('button', { name: 'Entrar' }));
-  expect(authMock.verifyOtp).toHaveBeenCalledWith({ email: 'ana@x.es', token: '123456', type: 'email' });
+  expect(authMock.signInWithPassword).toHaveBeenCalledWith({ email: 'ana@x.es', password: 'secreta1' });
+});
+
+test('credenciales incorrectas muestran error', async () => {
+  authMock.signInWithPassword.mockResolvedValueOnce({ data: {}, error: { message: 'Invalid login credentials' } });
+  renderApp('/login');
+  await userEvent.type(await screen.findByLabelText('Email'), 'ana@x.es');
+  await userEvent.type(screen.getByLabelText('Contraseña'), 'mala123');
+  await userEvent.click(screen.getByRole('button', { name: 'Entrar' }));
+  expect(await screen.findByText('Email o contraseña incorrectos.')).toBeInTheDocument();
+});
+
+test('crear cuenta llama a signUp', async () => {
+  renderApp('/login');
+  await userEvent.click(await screen.findByRole('button', { name: '¿No tienes cuenta? Crear una' }));
+  await userEvent.type(screen.getByLabelText('Email'), 'nico@x.es');
+  await userEvent.type(screen.getByLabelText('Contraseña'), 'secreta1');
+  await userEvent.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+  expect(authMock.signUp).toHaveBeenCalledWith({ email: 'nico@x.es', password: 'secreta1' });
+});
+
+test('crear cuenta con un email ya registrado avisa', async () => {
+  authMock.signUp.mockResolvedValueOnce({ data: { session: null }, error: { message: 'User already registered' } });
+  renderApp('/login');
+  await userEvent.click(await screen.findByRole('button', { name: '¿No tienes cuenta? Crear una' }));
+  await userEvent.type(screen.getByLabelText('Email'), 'ana@x.es');
+  await userEvent.type(screen.getByLabelText('Contraseña'), 'secreta1');
+  await userEvent.click(screen.getByRole('button', { name: 'Crear cuenta' }));
+  expect(await screen.findByText('Ese email ya tiene cuenta. Entra con tu contraseña.')).toBeInTheDocument();
 });
 
 test('con sesión pero sin perfil manda a /unirse', async () => {

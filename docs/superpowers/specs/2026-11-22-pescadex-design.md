@@ -173,7 +173,8 @@ haga gracia comparar Pescadex, niveles y récords.
 ### 8.5 Cuentas y grupo
 
 - Un único grupo privado. Registro solo con código de invitación.
-- Inicio de sesión con email + código de un solo uso (OTP) o contraseña. Evitar enlaces
+- Inicio de sesión con email + contraseña, sin confirmación por email (decidido: el plan gratuito
+  de Supabase no deja editar plantillas sin SMTP propio y limita los envíos). Evitar enlaces
   mágicos: en iOS abren Safari y no la PWA instalada.
 
 ### 8.6 Offline
