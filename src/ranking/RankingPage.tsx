@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthProvider';
 import { SPECIES_BY_ID } from '../catalog/catalog';
 import { listCatches, listOutings, listProfiles } from '../data/api';
 import type { Catch, Outing, Profile } from '../data/types';
+import { Avatar } from '../ui/Avatar';
 import { formatLength, formatWeight } from '../ui/format';
 import { speciesRecords, standings, type Standing } from './standings';
 
@@ -66,6 +67,7 @@ export function RankingPage() {
             .map((s, i) => (
               <li key={s.profile.id} data-testid="rank-row" className={`rank-row${s.profile.id === profile!.id ? ' me' : ''}`}>
                 <span className="rank-pos">{MEDAL[i] ?? i + 1}</span>
+                <Avatar profile={s.profile} size={34} />
                 <Link to={`/perfil/${s.profile.id}`} className="rank-name">{s.profile.displayName}</Link>
                 <span className="rank-value">{valueLabel(board, s)}</span>
               </li>

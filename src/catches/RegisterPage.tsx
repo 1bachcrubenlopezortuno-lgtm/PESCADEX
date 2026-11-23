@@ -73,6 +73,7 @@ export function RegisterPage() {
   const [weight, setWeight] = useState('');
   const [length, setLength] = useState('');
   const [bait, setBait] = useState('');
+  const [gear, setGear] = useState('');
   const [note, setNote] = useState('');
   const [shareExact, setShareExact] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -92,6 +93,7 @@ export function RegisterPage() {
     setWeight('');
     setLength('');
     setBait('');
+    setGear('');
     setNote('');
     setShareExact(false);
     setResult(null);
@@ -122,6 +124,7 @@ export function RegisterPage() {
         weightG,
         lengthCm,
         bait,
+        gear,
         note,
         shareExact,
         location,
@@ -219,6 +222,13 @@ export function RegisterPage() {
         Cebo / señuelo
         <input value={bait} onChange={(e) => setBait(e.target.value)} placeholder="Gusana, vinilo, cangrejo…" />
       </label>
+      <label className="field">
+        Equipo
+        <input list="gear-suggestions" value={gear} maxLength={120} onChange={(e) => setGear(e.target.value)} placeholder="Caña, carrete, línea…" />
+      </label>
+      <datalist id="gear-suggestions">
+        {[...new Set(myCatches.map((c) => c.gear).filter((g): g is string => Boolean(g)))].map((g) => <option key={g} value={g} />)}
+      </datalist>
       <label className="field">
         Nota
         <textarea rows={2} value={note} onChange={(e) => setNote(e.target.value)} />

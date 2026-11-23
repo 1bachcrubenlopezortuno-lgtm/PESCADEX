@@ -6,6 +6,7 @@ import { listOutings, toGameCatch } from '../data/api';
 import { levelInfo } from '../game/levels';
 import { isValidCatch, totalXp } from '../game/xp';
 import { pescadexProgress, unlockedSpeciesIds } from '../game/pescadex';
+import { Avatar } from '../ui/Avatar';
 import { SpeciesCard } from './SpeciesCard';
 import { useMyCatches } from './useMyCatches';
 
@@ -40,7 +41,6 @@ export function PescadexPage() {
     return best;
   }, [catches]);
   const lvl = levelInfo(totalXp(game, outingCount));
-  const initial = profile!.displayName.trim().charAt(0).toUpperCase();
 
   const visible = SPECIES.filter(
     (s) =>
@@ -52,7 +52,7 @@ export function PescadexPage() {
   return (
     <div>
       <header className="pescadex-header">
-        <div className="avatar" aria-hidden="true">{initial}</div>
+        <Avatar profile={profile!} size={46} />
         <div className="who">
           <h1>Pescadex</h1>
           <p className="level">{`Nv. ${lvl.level} · ${lvl.title}`}</p>

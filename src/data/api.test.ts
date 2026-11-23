@@ -33,7 +33,7 @@ test('toGameCatch cuenta las fotos', () => {
   const c: Catch = {
     id: '1', outingId: 'o', userId: 'u', speciesId: 'dorada', caughtAt: '2026-01-01T00:00:00Z',
     weightG: 900, lengthCm: null, bait: null, note: null, shareExact: false, approx: null, exact: null,
-    photoUrls: ['a', 'b'],
+    photoUrls: ['a', 'b'], photoPaths: ['u/1/a.jpg', 'u/1/b.jpg'], gear: null,
   };
   expect(toGameCatch(c)).toEqual({ id: '1', speciesId: 'dorada', caughtAt: '2026-01-01T00:00:00Z', photoCount: 2, weightG: 900, lengthCm: null });
 });

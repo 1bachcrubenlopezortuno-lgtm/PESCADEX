@@ -18,7 +18,7 @@ export function makeCatch(over: Partial<Catch> = {}): Catch {
   return {
     id: `c${n}`, outingId: 'o1', userId: 'u1', speciesId: 'dorada', caughtAt: `2026-01-01T10:${String(n % 60).padStart(2, '0')}:00Z`,
     weightG: null, lengthCm: null, bait: null, note: null, shareExact: false, approx: null, exact: null,
-    photoUrls: ['https://foto/1.jpg'], ...over,
+    photoUrls: ['https://foto/1.jpg'], photoPaths: [`u1/c${n}/p.jpg`], gear: null, ...over,
   };
 }
 
@@ -60,6 +60,7 @@ export async function apiMock() {
     getMyProfile: vi.fn(async () => backend.profile),
     joinGroup: vi.fn(async () => backend.profile),
     updateMyName: vi.fn(async () => {}),
+    updateMyAvatar: vi.fn(async () => {}),
     listProfiles: vi.fn(async () => backend.profiles),
     listCatches: vi.fn(async (f: { userId?: string; outingId?: string } = {}) =>
       backend.catches.filter((c) => (!f.userId || c.userId === f.userId) && (!f.outingId || c.outingId === f.outingId)),

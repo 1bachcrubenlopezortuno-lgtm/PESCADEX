@@ -12,7 +12,16 @@ function fail(error: { message: string } | null): void {
 }
 
 function toProfile(r: Row): Profile {
-  return { id: r.id, displayName: r.display_name, avatarPath: r.avatar_path ?? null };
+  return { id: r.id, displayName: r.display_name, avatarPath: r.avatar_path ?? null, avatarUrl: null };
+}
+
+/** Firma las fotos de perfil de una tanda de perfiles. */
+async function withAvatars(list: Profile[]): Promise<Profile[]> {
+  const paths = list.map((p) => p.avatarPath).filter((x): x is string => Boolean(x));
+  if (!paths.length) return list;
+  const { data } = await supabase.storage.from(PHOTO_BUCKET).createSignedUrls(paths, 3600);
+  const urls = new Map((data ?? []).filter((d) => d.path && d.signedUrl).map((d) => [d.path!, d.signedUrl]));
+  return list.map((p) => ({ ...p, avatarUrl: p.avatarPath ? (urls.get(p.avatarPath) ?? null) : null }));
 }
 
 function latLng(lat: unknown, lng: unknown): LatLng | null {
@@ -31,7 +40,7 @@ export async function getMyProfile(): Promise<Profile | null> {
   if (!auth.user) return null;
   const { data, error } = await supabase.from('profiles').select('*').eq('id', auth.user.id).maybeSingle();
   fail(error);
-  return data ? toProfile(data) : null;
+  return data ? (await withAvatars([toProfile(data)]))[0] : null;
 }
 
 export async function joinGroup(code: string, displayName: string): Promise<Profile> {
@@ -49,7 +58,14 @@ export async function updateMyName(displayName: string): Promise<void> {
 export async function listProfiles(): Promise<Profile[]> {
   const { data, error } = await supabase.from('profiles').select('*').order('display_name');
   fail(error);
-  return (data ?? []).map(toProfile);
+  return withAvatars((data ?? []).map(toProfile));
+}
+
+export async function updateMyAvatar(path: string | null): Promise<void> {
+  const id = await currentUserId();
+  if (path && !path.startsWith(`${id}/`)) throw new Error('not_your_photo');
+  const { error } = await supabase.from('profiles').update({ avatar_path: path }).eq('id', id);
+  fail(error);
 }
 
 // ---------- Jornadas ----------
@@ -168,6 +184,7 @@ export async function createCatch(c: NewCatch): Promise<void> {
       weight_g: c.weightG ?? null,
       length_cm: c.lengthCm ?? null,
       bait: c.bait?.trim() || null,
+      gear: c.gear?.trim() || null,
       note: c.note?.trim() || null,
       share_exact: c.shareExact,
     },
@@ -215,6 +232,8 @@ async function toCatches(rows: Row[]): Promise<Catch[]> {
       approx: latLng(r.approx_lat, r.approx_lng),
       exact: exact ? latLng(exact.lat, exact.lng) : null,
       photoUrls: photos.map((p: Row) => urls.get(p.path) ?? ''), // una entrada por foto aunque falle la firma (el recuento da la XP)
+      photoPaths: photos.map((p: Row) => p.path as string),
+      gear: r.gear ?? null,
     };
   });
 }

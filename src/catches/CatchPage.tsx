@@ -69,6 +69,7 @@ export function CatchPage() {
         {c.weightG != null && <p><strong>Peso:</strong> {formatWeight(c.weightG)}</p>}
         {c.lengthCm != null && <p><strong>Medida:</strong> {formatLength(c.lengthCm)}</p>}
         {c.bait && <p><strong>Cebo / señuelo:</strong> {c.bait}</p>}
+        {c.gear && <p><strong>Equipo:</strong> <span>{c.gear}</span></p>}
         {c.note && <p>{c.note}</p>}
         <LocationLine exact={c.exact} approx={c.approx} />
       </div>

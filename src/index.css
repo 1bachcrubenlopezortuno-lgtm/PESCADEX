@@ -259,3 +259,11 @@ select { color-scheme: dark; }
 .gallery-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
 
 .create-species { display: grid; gap: 6px; padding: 12px; margin-bottom: 14px; border: 1px dashed rgb(54 224 194 / 0.5); border-radius: 14px; background: rgb(54 224 194 / 0.05); }
+
+/* Fotos de perfil */
+.avatar { overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rank-row { grid-template-columns: 2.2rem 34px 1fr auto; }
+.rank-row .avatar { border-radius: 11px; }
+.avatar-choices { margin-top: 10px; }
+.avatar-choices .gallery-item { border: 0; padding: 0; background: none; cursor: pointer; }

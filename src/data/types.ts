@@ -2,6 +2,8 @@ export interface Profile {
   id: string;
   displayName: string;
   avatarPath: string | null;
+  /** URL firmada de la foto de perfil (si tiene). */
+  avatarUrl?: string | null;
 }
 
 export type OutingMode = 'surfcasting' | 'spinning' | 'barco' | 'embalse' | 'rio' | 'otra';
@@ -48,6 +50,9 @@ export interface Catch {
   approx: LatLng | null;
   exact: LatLng | null;
   photoUrls: string[];
+  /** Rutas en el almacenamiento, en el mismo orden que photoUrls. */
+  photoPaths: string[];
+  gear: string | null;
 }
 
 export interface NewCatch {
@@ -58,6 +63,7 @@ export interface NewCatch {
   weightG?: number;
   lengthCm?: number;
   bait?: string;
+  gear?: string;
   note?: string;
   shareExact: boolean;
   location: LatLng | null;

@@ -9,6 +9,7 @@ export interface PastCatch {
   weightG?: number;
   lengthCm?: number;
   bait?: string;
+  gear?: string;
   photo?: File;
 }
 
@@ -18,6 +19,7 @@ interface Row {
   weight: string;
   length: string;
   bait: string;
+  gear: string;
   photo: File | null;
 }
 
@@ -44,7 +46,7 @@ const timeOf = (iso: string | null) => {
 };
 
 let nextKey = 0;
-const emptyRow = (): Row => ({ key: nextKey++, species: null, weight: '', length: '', bait: '', photo: null });
+const emptyRow = (): Row => ({ key: nextKey++, species: null, weight: '', length: '', bait: '', gear: '', photo: null });
 
 /**
  * Apuntar una jornada que ya pasó (día, horas, sitio, participantes y lo que se pescó),
@@ -98,6 +100,7 @@ export function PastOutingForm({ friends, onSave, onCancel, initial }: { friends
             weightG: kg ? Math.round(kg * 1000) : undefined,
             lengthCm: toNumber(r.length),
             bait: r.bait.trim() || undefined,
+            gear: r.gear.trim() || undefined,
             photo: r.photo ?? undefined,
           };
         }),
@@ -177,6 +180,10 @@ export function PastOutingForm({ friends, onSave, onCancel, initial }: { friends
           <label className="field">
             Cebo / señuelo
             <input value={r.bait} onChange={(e) => update(r.key, { bait: e.target.value })} />
+          </label>
+          <label className="field">
+            Equipo
+            <input value={r.gear} maxLength={120} onChange={(e) => update(r.key, { gear: e.target.value })} placeholder="Caña, carrete, línea…" />
           </label>
           <label className="field">
             Foto

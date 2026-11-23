@@ -67,7 +67,7 @@ export function NotebookPage() {
             await createOuting(o);
             for (const f of fish) {
               const id = crypto.randomUUID();
-              await createCatch({ id, outingId: o.id, speciesId: f.speciesId, caughtAt: o.startedAt, weightG: f.weightG, lengthCm: f.lengthCm, bait: f.bait, shareExact: false, location: o.location });
+              await createCatch({ id, outingId: o.id, speciesId: f.speciesId, caughtAt: o.startedAt, weightG: f.weightG, lengthCm: f.lengthCm, bait: f.bait, gear: f.gear, shareExact: false, location: o.location });
               // Si la foto falla, la captura queda guardada "sin foto" y se puede añadir después.
               if (f.photo) await addCatchPhoto(id, await preparePhoto(f.photo)).catch(() => {});
             }

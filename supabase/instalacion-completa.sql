@@ -270,6 +270,9 @@ create policy species_insert_custom on public.species for insert to authenticate
   and habitats <@ array['mar', 'dulce']::text[]
 );
 
+-- Equipo con el que se hizo cada captura (caña, carrete, línea…).
+alter table public.catches add column if not exists gear text check (length(gear) <= 120);
+
 -- Generado por scripts/gen-species-seed.ts a partir de src/catalog/species.json. No editar a mano.
 insert into public.species (id, common_name, rarity, legal) values
   ('barbo-gitano', 'Barbo gitano', 'comun', 'libre'),
