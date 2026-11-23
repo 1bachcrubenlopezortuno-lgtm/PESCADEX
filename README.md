@@ -55,17 +55,20 @@ borrarían también todas sus capturas):
 update auth.users set encrypted_password = crypt('nueva-contraseña', gen_salt('bf')) where email = 'amigo@email.com';
 ```
 
-### 4. Publicar la app (gratis, con Netlify)
+### 4. Publicar la app (gratis, con Cloudflare Pages)
 
-1. Entra en <https://app.netlify.com> y regístrate con **GitHub**.
-2. **Add new project** → **Import an existing project** → **GitHub** → autoriza y elige este repositorio.
-3. En **Branch to deploy** elige la rama donde está la app.
-4. Deja la configuración de build como viene (sale de `netlify.toml`).
-5. Pulsa **Add environment variables** y añade dos:
-   - `VITE_SUPABASE_URL` = la *Project URL* de Supabase
-   - `VITE_SUPABASE_ANON_KEY` = la clave pública de Supabase (*anon public* o *Publishable key*)
-6. Pulsa **Deploy**. En 1–2 minutos tendrás una dirección tipo `https://algo.netlify.app`
-   (puedes cambiarla en **Project configuration → Change project name**).
+1. Crea una cuenta gratuita en <https://dash.cloudflare.com>.
+2. **Workers & Pages** → **Create** → pestaña **Pages** → **Connect to Git** → autoriza GitHub y elige este repositorio.
+3. Configuración:
+   - **Production branch:** `main`
+   - **Framework preset:** *None* (o *Vite*)
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Environment variables:** `NODE_VERSION` = `22`
+4. **Save and Deploy**. Te dará una dirección tipo `https://pescadex.pages.dev`.
+5. Para no gastar compilaciones en ramas de trabajo: **Settings → Builds & deployments → Preview deployments → None**.
+
+Solo se publica cuando hay cambios en la rama `main`.
 
 ### 5. Instalarla en el móvil
 
