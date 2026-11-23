@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { SPECIES, capturable } from '../catalog/catalog';
 import type { Species } from '../catalog/types';
 
@@ -6,6 +6,7 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
 
 export function SpeciesPicker({ value, onChange }: { value: Species | null; onChange(s: Species | null): void }) {
   const [q, setQ] = useState('');
+  const inputId = useId();
   const results = useMemo(() => {
     const n = norm(q.trim());
     if (!n) return [];
@@ -26,8 +27,8 @@ export function SpeciesPicker({ value, onChange }: { value: Species | null; onCh
   }
   return (
     <div className="field">
-      <label htmlFor="species-search">Buscar especie</label>
-      <input id="species-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Dorada, lubina, barbo…" autoComplete="off" />
+      <label htmlFor={inputId}>Buscar especie</label>
+      <input id={inputId} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Dorada, lubina, barbo…" autoComplete="off" />
       <div className="picker-results">
         {results.map((s) => (
           <button type="button" key={s.id} className="picker-option" onClick={() => onChange(s)}>

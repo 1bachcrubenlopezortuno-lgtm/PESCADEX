@@ -107,7 +107,7 @@ export function RegisterPage() {
     try {
       const myOutings = await listOutings({ userId: me });
       if (targetId && !target) return;
-      const location = pastOuting ? null : ((await locationRef.current) ?? null);
+      const location = pastOuting ? (target?.exact ?? null) : ((await locationRef.current) ?? null);
       const outing = target ?? active ?? (await start({ mode: 'otra', companionIds: [], shareExact: false }, location));
       const newOuting = !myOutings.some((o) => o.id === outing.id);
       const caughtAt = pastOuting && caughtAtInput ? new Date(caughtAtInput).toISOString() : new Date().toISOString();

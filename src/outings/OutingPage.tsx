@@ -41,6 +41,7 @@ export function OutingPage() {
       <Link to="/cuaderno" className="muted">← Cuaderno</Link>
       <h1>{OUTING_MODE_LABEL[outing.mode]} · {formatDateTime(outing.startedAt)}</h1>
       <div className="card">
+        {outing.placeName && <p><strong>Sitio:</strong> {outing.placeName}</p>}
         <p><strong>Participantes:</strong> {[outing.ownerId, ...outing.companionIds].map(name).join(', ')}</p>
         <p><strong>Duración:</strong> {outing.endedAt ? `hasta ${formatDateTime(outing.endedAt)}` : 'en curso'}</p>
         <LocationLine exact={outing.exact} approx={outing.approx} />

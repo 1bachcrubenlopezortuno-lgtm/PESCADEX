@@ -69,7 +69,7 @@ fieldset.field legend { padding: 0 6px; }
 .check input { width: 20px; height: 20px; accent-color: var(--accent); }
 select { color-scheme: dark; }
 .row { display: flex; gap: 8px; flex-wrap: wrap; }
-.row.two > .field { flex: 1; min-width: 120px; }
+.row.two > .field { flex: 1 1 0; min-width: 0; }
 .file-btn { margin: 8px 0 14px; cursor: pointer; }
 
 /* ---------- Superficies ---------- */
@@ -225,3 +225,19 @@ select { color-scheme: dark; }
 .confirm { border-color: rgb(255 107 125 / 0.5); background: rgb(255 107 125 / 0.08); margin: 12px 0; }
 .danger-zone { margin-top: 28px; }
 .row.stack { flex-direction: column; }
+
+/* Mapa */
+.map-picker { display: grid; gap: 8px; margin-bottom: 14px; }
+.map-box { height: 240px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: var(--deep); }
+.leaflet-container { font-family: var(--f-body); }
+
+/* Peces de una jornada pasada */
+.past-catch { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; background: rgb(3 13 23 / 0.35); }
+.past-catch-head { display: flex; justify-content: space-between; align-items: center; }
+.link-btn { background: none; border: 0; color: var(--danger); font-weight: 600; padding: 4px; }
+
+/* Que ningún campo empuje la página hacia los lados */
+.field input, .field select, .field textarea { width: 100%; min-width: 0; }
+.row.two > .field { flex: 1 1 0; min-width: 0; }
+.past-catch, .past-catch > *, .card > * { min-width: 0; }
+.picker-option { overflow-wrap: anywhere; }

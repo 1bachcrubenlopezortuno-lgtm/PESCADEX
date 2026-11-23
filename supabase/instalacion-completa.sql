@@ -244,6 +244,9 @@ end $$;
 create trigger outings_protect_others_catches before delete on public.outings
 for each row execute function public.protect_others_catches();
 
+-- Nombre del sitio de una jornada (p. ej. "Playa de la Fontanilla"), visible para el grupo.
+alter table public.outings add column if not exists place_name text check (length(place_name) <= 80);
+
 -- Generado por scripts/gen-species-seed.ts a partir de src/catalog/species.json. No editar a mano.
 insert into public.species (id, common_name, rarity, legal) values
   ('barbo-gitano', 'Barbo gitano', 'comun', 'libre'),

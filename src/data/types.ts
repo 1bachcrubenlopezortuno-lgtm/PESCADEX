@@ -27,6 +27,7 @@ export interface Outing {
   endedAt: string | null;
   mode: OutingMode;
   note: string | null;
+  placeName: string | null;
   companionIds: string[];
   approx: LatLng | null;
   exact: LatLng | null;
@@ -71,4 +72,5 @@ export interface NewOuting {
   location: LatLng | null;
   shareExact: boolean;
   note?: string;
+  placeName?: string;
 }

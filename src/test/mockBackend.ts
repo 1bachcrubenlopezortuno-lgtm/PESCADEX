@@ -23,7 +23,7 @@ export function makeCatch(over: Partial<Catch> = {}): Catch {
 export function makeOuting(over: Partial<Outing> = {}): Outing {
   n++;
   return {
-    id: `o${n}`, ownerId: 'u1', startedAt: new Date().toISOString(), endedAt: null, mode: 'spinning', note: null,
+    id: `o${n}`, ownerId: 'u1', startedAt: new Date().toISOString(), endedAt: null, mode: 'spinning', note: null, placeName: null,
     companionIds: [], approx: null, exact: null, shareExact: false, ...over,
   };
 }

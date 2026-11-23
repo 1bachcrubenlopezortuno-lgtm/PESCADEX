@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
-import { createOuting, listCatches, listOutings, listProfiles } from '../data/api';
+import { addCatchPhoto, createCatch, createOuting, listCatches, listOutings, listProfiles } from '../data/api';
+import { preparePhoto } from '../data/photo';
 import { OUTING_MODE_LABEL, type Catch, type Outing, type Profile } from '../data/types';
 import { formatDateTime } from '../ui/format';
 import { PastOutingForm } from './PastOutingForm';
@@ -62,8 +63,14 @@ export function NotebookPage() {
         <PastOutingForm
           friends={profiles.filter((p) => p.id !== me)}
           onCancel={() => setForm('none')}
-          onSave={async (o) => {
+          onSave={async (o, fish) => {
             await createOuting(o);
+            for (const f of fish) {
+              const id = crypto.randomUUID();
+              await createCatch({ id, outingId: o.id, speciesId: f.speciesId, caughtAt: o.startedAt, weightG: f.weightG, lengthCm: f.lengthCm, bait: f.bait, shareExact: false, location: o.location });
+              // Si la foto falla, la captura queda guardada "sin foto" y se puede añadir después.
+              if (f.photo) await addCatchPhoto(id, await preparePhoto(f.photo)).catch(() => {});
+            }
             navigate(`/jornada/${o.id}`);
           }}
         />
@@ -89,7 +96,7 @@ export function NotebookPage() {
               <Link className="card outing-row" to={`/jornada/${o.id}`}>
                 <div>
                   <strong>{formatDateTime(o.startedAt)}</strong>
-                  <div className="muted">{OUTING_MODE_LABEL[o.mode]} · {people}</div>
+                  <div className="muted">{OUTING_MODE_LABEL[o.mode]}{o.placeName ? ` · ${o.placeName}` : ''} · {people}</div>
                 </div>
                 <span className="tag">{n === 0 ? 'En blanco' : `${n} ${n === 1 ? 'captura' : 'capturas'}`}</span>
               </Link>

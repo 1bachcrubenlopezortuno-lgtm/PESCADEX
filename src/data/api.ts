@@ -54,7 +54,7 @@ export async function listProfiles(): Promise<Profile[]> {
 // ---------- Jornadas ----------
 export async function createOuting(o: NewOuting): Promise<void> {
   const { error } = await supabase.from('outings').upsert(
-    { id: o.id, started_at: o.startedAt, ended_at: o.endedAt ?? null, mode: o.mode, note: o.note ?? null, share_exact: o.shareExact },
+    { id: o.id, started_at: o.startedAt, ended_at: o.endedAt ?? null, mode: o.mode, note: o.note ?? null, place_name: o.placeName?.trim() || null, share_exact: o.shareExact },
     { onConflict: 'id', ignoreDuplicates: true },
   );
   fail(error);
@@ -110,6 +110,7 @@ function toOuting(r: Row): Outing {
     endedAt: r.ended_at,
     mode: r.mode,
     note: r.note,
+    placeName: r.place_name ?? null,
     companionIds: (r.outing_companions ?? []).map((c: Row) => c.user_id),
     approx: latLng(r.approx_lat, r.approx_lng),
     exact: exact ? latLng(exact.lat, exact.lng) : null,

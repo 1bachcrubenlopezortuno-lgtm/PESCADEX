@@ -48,6 +48,7 @@ export function useActiveOuting() {
         endedAt: null,
         mode: input.mode,
         note: input.note ?? null,
+        placeName: null,
         companionIds: input.companionIds,
         approx: null,
         exact: location,
