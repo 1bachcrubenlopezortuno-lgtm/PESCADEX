@@ -1,4 +1,4 @@
--- PESCADEX: instalación completa en un solo paso.
+-- PESCADEX: instalación completa en un solo paso (proyecto nuevo).
 -- Pega TODO este archivo en Supabase → SQL Editor → New query y pulsa Run.
 -- Al final te devuelve el código de invitación del grupo: apúntalo.
 
@@ -247,6 +247,29 @@ for each row execute function public.protect_others_catches();
 -- Nombre del sitio de una jornada (p. ej. "Playa de la Fontanilla"), visible para el grupo.
 alter table public.outings add column if not exists place_name text check (length(place_name) <= 80);
 
+-- Especies añadidas por el grupo (peces que no están en el catálogo base).
+alter table public.species
+  add column if not exists created_by uuid references public.profiles (id) on delete set null,
+  add column if not exists scientific_name text check (length(scientific_name) <= 80),
+  add column if not exists habitats text[] not null default '{mar}',
+  add column if not exists description text check (length(description) <= 400),
+  add column if not exists created_at timestamptz not null default now();
+
+do $$ begin
+  if not exists (select 1 from pg_constraint where conname = 'species_common_name_len') then
+    alter table public.species add constraint species_common_name_len check (length(trim(common_name)) between 1 and 40) not valid;
+  end if;
+end $$;
+
+drop policy if exists species_insert_custom on public.species;
+create policy species_insert_custom on public.species for insert to authenticated with check (
+  public.is_member()
+  and created_by = auth.uid()
+  and legal = 'libre'
+  and id like 'custom-%'
+  and habitats <@ array['mar', 'dulce']::text[]
+);
+
 -- Generado por scripts/gen-species-seed.ts a partir de src/catalog/species.json. No editar a mano.
 insert into public.species (id, common_name, rarity, legal) values
   ('barbo-gitano', 'Barbo gitano', 'comun', 'libre'),
@@ -326,7 +349,8 @@ insert into public.species (id, common_name, rarity, legal) values
   ('pez-espada', 'Pez espada', 'legendaria', 'libre'),
   ('pulpo', 'Pulpo', 'poco_comun', 'libre'),
   ('choco', 'Choco / Sepia', 'poco_comun', 'libre'),
-  ('calamar', 'Calamar', 'rara', 'libre')
+  ('calamar', 'Calamar', 'rara', 'libre'),
+  ('blenio', 'Blenio', 'comun', 'libre')
 on conflict (id) do update set common_name = excluded.common_name, rarity = excluded.rarity, legal = excluded.legal;
 
 -- Código de invitación aleatorio

@@ -1,5 +1,6 @@
 // Estado compartido para los mocks de supabase y api en tests de pantallas.
 import { vi } from 'vitest';
+import type { Species } from '../catalog/types';
 import type { Catch, Outing, Profile } from '../data/types';
 
 export const backend = {
@@ -8,6 +9,7 @@ export const backend = {
   profiles: [] as Profile[],
   catches: [] as Catch[],
   outings: [] as Outing[],
+  customSpecies: [] as Species[],
 };
 
 let n = 0;
@@ -34,6 +36,7 @@ export function resetBackend() {
   backend.profiles = [];
   backend.catches = [];
   backend.outings = [];
+  backend.customSpecies = [];
 }
 
 export const authMock = {
@@ -76,6 +79,16 @@ export async function apiMock() {
     createOuting: vi.fn(async () => {}),
     endOuting: vi.fn(async () => {}),
     createCatch: vi.fn(async () => {}),
+    listCustomSpecies: vi.fn(async () => backend.customSpecies),
+    createCustomSpecies: vi.fn(async (input: { commonName: string; scientificName?: string; habitats: ('mar' | 'dulce')[]; rarity: Species['rarity'] }) => {
+      const s: Species = {
+        id: `custom-${input.commonName.toLowerCase().replace(/\s+/g, '-')}`, commonName: input.commonName, scientificName: input.scientificName ?? '',
+        habitats: input.habitats, group: 'Añadidas por el grupo', rarity: input.rarity, legal: 'libre', description: 'Especie añadida por el grupo.',
+        bestMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], zones: '—', createdBy: backend.profile?.id,
+      };
+      backend.customSpecies.push(s);
+      return s;
+    }),
     deleteOuting: vi.fn(async () => {}),
     updateOuting: vi.fn(async () => {}),
     deleteCatch: vi.fn(async () => {}),

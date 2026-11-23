@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { AuthProvider, useAuth, type AuthStatus } from './auth/AuthProvider';
+import { CatalogProvider } from './catalog/CatalogProvider';
 import { JoinPage } from './auth/JoinPage';
 import { LoginPage } from './auth/LoginPage';
 import { CatchPage } from './catches/CatchPage';
@@ -35,6 +36,7 @@ function Shell() {
 
 export function AppRoutes() {
   return (
+    <CatalogProvider>
     <Routes>
       <Route path="/login" element={<Gate want="signed_out"><LoginPage /></Gate>} />
       <Route path="/unirse" element={<Gate want="needs_join"><JoinPage /></Gate>} />
@@ -50,6 +52,7 @@ export function AppRoutes() {
         <Route path="/perfil/:userId" element={<ProfilePage />} />
       </Route>
     </Routes>
+    </CatalogProvider>
   );
 }
 

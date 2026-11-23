@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { SPECIES_BY_ID, speciesNumber } from '../catalog/catalog';
+import { useCatalog } from '../catalog/CatalogProvider';
 import { RARITY_LABEL } from '../catalog/types';
 import { listProfiles, toGameCatch } from '../data/api';
 import type { Profile } from '../data/types';
@@ -13,6 +14,7 @@ import { useCatches } from './useMyCatches';
 export function SpeciesPage() {
   const { id = '' } = useParams();
   const { profile } = useAuth();
+  useCatalog();
   const species = SPECIES_BY_ID[id];
   const { catches } = useCatches({});
   const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -61,7 +63,10 @@ export function SpeciesPage() {
         {!unlocked && !locked && <p className="hint">Todavía no la has capturado. ¡Sal a buscarla!</p>}
         <p><strong>Mejor época:</strong> {monthsLabel(species.bestMonths)}</p>
         <p><strong>Dónde:</strong> {species.zones}</p>
-        <p className="muted">{species.group}</p>
+        <p className="muted">
+          {species.group}
+          {species.createdBy && ` · añadida por ${profiles.find((p) => p.id === species.createdBy)?.displayName ?? 'alguien del grupo'}`}
+        </p>
       </div>
 
       {unlocked && (

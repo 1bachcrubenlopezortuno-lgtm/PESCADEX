@@ -1,3 +1,4 @@
+import type { Habitat, Rarity, Species } from '../catalog/types';
 import type { GameCatch } from '../game/xp';
 import { supabase } from './supabase';
 import type { Catch, LatLng, NewCatch, NewOuting, Outing, Profile } from './types';
@@ -235,4 +236,59 @@ export async function getCatch(id: string): Promise<Catch> {
 
 export function toGameCatch(c: Catch): GameCatch {
   return { id: c.id, speciesId: c.speciesId, caughtAt: c.caughtAt, photoCount: c.photoUrls.length, weightG: c.weightG, lengthCm: c.lengthCm };
+}
+
+// ---------- Especies añadidas por el grupo ----------
+const ALL_MONTHS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+function toSpecies(r: Row): Species {
+  return {
+    id: r.id,
+    commonName: r.common_name,
+    scientificName: r.scientific_name ?? '',
+    habitats: (r.habitats ?? ['mar']) as Habitat[],
+    group: 'Añadidas por el grupo',
+    rarity: r.rarity,
+    legal: 'libre',
+    description: r.description || 'Especie añadida por el grupo.',
+    bestMonths: ALL_MONTHS,
+    zones: '—',
+    createdBy: r.created_by ?? undefined,
+  };
+}
+
+export async function listCustomSpecies(): Promise<Species[]> {
+  const { data, error } = await supabase.from('species').select('*').not('created_by', 'is', null).order('created_at');
+  fail(error);
+  return (data ?? []).map(toSpecies);
+}
+
+export interface NewSpecies {
+  commonName: string;
+  scientificName?: string;
+  habitats: Habitat[];
+  rarity: Rarity;
+  description?: string;
+}
+
+export async function createCustomSpecies(n: NewSpecies): Promise<Species> {
+  const uid = await currentUserId();
+  const slug = n.commonName.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30);
+  const id = `custom-${slug || 'pez'}-${crypto.randomUUID().slice(0, 4)}`;
+  const { data, error } = await supabase
+    .from('species')
+    .insert({
+      id,
+      common_name: n.commonName.trim(),
+      scientific_name: n.scientificName?.trim() || null,
+      habitats: n.habitats,
+      rarity: n.rarity,
+      legal: 'libre',
+      description: n.description?.trim() || null,
+      created_by: uid,
+    })
+    .select()
+    .single();
+  fail(error);
+  return toSpecies(data);
 }

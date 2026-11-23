@@ -77,5 +77,6 @@ insert into public.species (id, common_name, rarity, legal) values
   ('pez-espada', 'Pez espada', 'legendaria', 'libre'),
   ('pulpo', 'Pulpo', 'poco_comun', 'libre'),
   ('choco', 'Choco / Sepia', 'poco_comun', 'libre'),
-  ('calamar', 'Calamar', 'rara', 'libre')
+  ('calamar', 'Calamar', 'rara', 'libre'),
+  ('blenio', 'Blenio', 'comun', 'libre')
 on conflict (id) do update set common_name = excluded.common_name, rarity = excluded.rarity, legal = excluded.legal;

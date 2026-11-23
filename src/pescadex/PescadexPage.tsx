@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '../auth/AuthProvider';
-import { SPECIES } from '../catalog/catalog';
+import { useCatalog } from '../catalog/CatalogProvider';
 import { RARITIES, RARITY_LABEL, type Habitat, type Rarity } from '../catalog/types';
 import { listOutings, toGameCatch } from '../data/api';
 import { levelInfo } from '../game/levels';
@@ -14,6 +14,7 @@ type Status = 'todas' | 'capturadas' | 'pendientes';
 export function PescadexPage() {
   const { profile } = useAuth();
   const { catches, loading, error } = useMyCatches(profile!.id);
+  const { species: SPECIES } = useCatalog();
   const [habitat, setHabitat] = useState<Habitat | null>(null);
   const [rarity, setRarity] = useState<Rarity | ''>('');
   const [status, setStatus] = useState<Status>('todas');

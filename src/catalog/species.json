@@ -1724,5 +1724,32 @@
    12
   ],
   "zones": "Puertos y espigones iluminados de noche."
+ },
+ {
+  "id": "blenio",
+  "commonName": "Blenio",
+  "scientificName": "Parablennius spp.",
+  "habitats": [
+   "mar"
+  ],
+  "group": "Blénidos",
+  "rarity": "comun",
+  "legal": "libre",
+  "description": "Cabezón, sin escamas y con cejas como cuernos. Vive escondido en los agujeros de la roca y muerde todo lo que pasa por delante.",
+  "bestMonths": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "zones": "Rocas, escolleras y pozas de marea de toda la costa."
  }
 ]

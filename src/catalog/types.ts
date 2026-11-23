@@ -14,6 +14,8 @@ export interface Species {
   description: string;
   bestMonths: number[];
   zones: string;
+  /** Solo en especies añadidas por el grupo: quién la creó. */
+  createdBy?: string;
 }
 
 export const RARITIES: Rarity[] = ['comun', 'poco_comun', 'rara', 'epica', 'legendaria'];
