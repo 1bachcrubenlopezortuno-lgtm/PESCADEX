@@ -1,4 +1,4 @@
 [{
   "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": { "namespace": "android_app", "package_name": "es.pescadex.app", "sha256_cert_fingerprints": ["76:17:72:0C:C9:D8:3C:82:D4:EA:A3:24:5C:75:DD:AA:92:6F:9E:E1:52:E1:6E:A5:AF:8D:77:F5:9A:F9:BF:AC"] }
+  "target": { "namespace": "android_app", "package_name": "es.pescadex.app", "sha256_cert_fingerprints": ["DC:12:5A:F3:44:D1:AA:F4:A4:3D:2E:C1:26:03:E2:B7:78:8E:DD:A5:E4:22:4A:FC:2A:5F:63:89:35:B6:82:EF"] }
 }]
