@@ -12,11 +12,18 @@ export function speciesImage(id: string): string | undefined {
 }
 
 /** Dibujo de la especie: interrogación si no está capturada, ilustración (o pez genérico) si lo está. */
-export function SpeciesArt({ species, revealed, size = 64 }: { species: Species; revealed: boolean; size?: number }) {
+export function SpeciesArt({ species, revealed, size = 64, photoUrl }: { species: Species; revealed: boolean; size?: number; photoUrl?: string }) {
   if (!revealed) {
     return (
       <span className="art art-unknown" data-testid="art-unknown" style={{ width: size, height: size, fontSize: size * 0.55 }} aria-hidden="true">
         {species.legal === 'protegida' ? '🔒' : '?'}
+      </span>
+    );
+  }
+  if (photoUrl) {
+    return (
+      <span className="art art-photo" data-testid="art-revealed" style={{ width: size, height: size }} aria-hidden="true">
+        <img src={photoUrl} alt="" width={size} height={size} loading="lazy" />
       </span>
     );
   }

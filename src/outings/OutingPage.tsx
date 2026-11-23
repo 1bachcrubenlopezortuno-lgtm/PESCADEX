@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import { SPECIES_BY_ID } from '../catalog/catalog';
-import { deleteOuting, getOuting, listProfiles } from '../data/api';
+import { deleteOuting, getOuting, listProfiles, updateOuting } from '../data/api';
+import { PastOutingForm } from './PastOutingForm';
 import { OUTING_MODE_LABEL, type Catch, type Outing, type Profile } from '../data/types';
 import { ConfirmBox } from '../ui/ConfirmBox';
 import { formatDateTime, formatWeight } from '../ui/format';
@@ -16,6 +17,8 @@ export function OutingPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [confirming, setConfirming] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     Promise.all([getOuting(id), listProfiles()])
@@ -24,7 +27,7 @@ export function OutingPage() {
         setProfiles(p);
       })
       .catch(() => setError('No se encontró la jornada.'));
-  }, [id]);
+  }, [id, reloadKey]);
 
   if (error) return <p className="error">{error}</p>;
   if (!data) return <p className="muted">Cargando…</p>;
@@ -40,6 +43,26 @@ export function OutingPage() {
     <div>
       <Link to="/cuaderno" className="muted">← Cuaderno</Link>
       <h1>{OUTING_MODE_LABEL[outing.mode]} · {formatDateTime(outing.startedAt)}</h1>
+      {editing && (
+        <PastOutingForm
+          initial={outing}
+          friends={profiles.filter((p) => p.id !== outing.ownerId)}
+          onCancel={() => setEditing(false)}
+          onSave={async (o) => {
+            await updateOuting(outing.id, {
+              startedAt: o.startedAt,
+              endedAt: o.endedAt,
+              mode: o.mode,
+              note: o.note,
+              placeName: o.placeName,
+              companionIds: o.companionIds,
+              location: o.location,
+            });
+            setEditing(false);
+            setReloadKey((k) => k + 1);
+          }}
+        />
+      )}
       <div className="card">
         {outing.placeName && <p><strong>Sitio:</strong> {outing.placeName}</p>}
         <p><strong>Participantes:</strong> {[outing.ownerId, ...outing.companionIds].map(name).join(', ')}</p>
@@ -64,6 +87,10 @@ export function OutingPage() {
           </li>
         ))}
       </ul>
+
+      {isOwner && !editing && (
+        <button className="btn secondary block" style={{ marginTop: 20 }} onClick={() => setEditing(true)}>Editar jornada</button>
+      )}
 
       {isOwner && (
         <div className="danger-zone">

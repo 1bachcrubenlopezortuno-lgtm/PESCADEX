@@ -10,6 +10,7 @@ import { OutingPage } from './outings/OutingPage';
 import { PescadexPage } from './pescadex/PescadexPage';
 import { SpeciesPage } from './pescadex/SpeciesPage';
 import { ProfilePage } from './profile/ProfilePage';
+import { RankingPage } from './ranking/RankingPage';
 import { TabBar } from './ui/TabBar';
 
 const HOME: Record<Exclude<AuthStatus, 'loading'>, string> = { signed_out: '/login', needs_join: '/unirse', member: '/' };
@@ -44,6 +45,7 @@ export function AppRoutes() {
         <Route path="/jornada/:id" element={<OutingPage />} />
         <Route path="/registrar" element={<RegisterPage />} />
         <Route path="/captura/:id" element={<CatchPage />} />
+        <Route path="/ranking" element={<RankingPage />} />
         <Route path="/perfil" element={<ProfilePage />} />
         <Route path="/perfil/:userId" element={<ProfilePage />} />
       </Route>

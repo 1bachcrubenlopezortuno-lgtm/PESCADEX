@@ -32,12 +32,14 @@ export function SpeciesPage() {
   const maxWeight = Math.max(0, ...mine.map((c) => c.weightG ?? 0));
   const maxLength = Math.max(0, ...mine.map((c) => c.lengthCm ?? 0));
   const holders = profiles.filter((p) => valid.some((c) => c.userId === p.id));
+  const gallery = valid.flatMap((c) => c.photoUrls.filter(Boolean).map((url) => ({ url, c })));
+  const heroPhoto = mine.flatMap((c) => c.photoUrls.filter(Boolean))[0];
 
   return (
     <div className="species-page">
       <Link to="/" className="muted">← Pescadex</Link>
       <div className={`species-hero${unlocked ? ' unlocked' : ''}`} style={{ ['--rc' as string]: `var(--r-${species.rarity})` }}>
-        <SpeciesArt species={species} revealed={unlocked} size={112} />
+        <SpeciesArt species={species} revealed={unlocked} size={112} photoUrl={heroPhoto} />
         <div>
           <span className="muted">{speciesNumber(species.id)}</span>
           <h1>{species.commonName}</h1>
@@ -74,6 +76,23 @@ export function SpeciesPage() {
             ))}
           </ul>
         </>
+      )}
+
+      <h2>Fotos del grupo ({gallery.length})</h2>
+      {gallery.length ? (
+        <div className="gallery">
+          {gallery.map(({ url, c }) => {
+            const who = profiles.find((p) => p.id === c.userId)?.displayName ?? '¿?';
+            return (
+              <Link key={url} to={`/captura/${c.id}`} className="gallery-item">
+                <img src={url} alt={`${species.commonName} de ${who}`} loading="lazy" />
+                <span>{who}{c.weightG ? ` · ${formatWeight(c.weightG)}` : ''}</span>
+              </Link>
+            );
+          })}
+        </div>
+      ) : (
+        <p className="muted">Nadie ha subido todavía una foto de esta especie.</p>
       )}
 
       <h2>En el grupo</h2>

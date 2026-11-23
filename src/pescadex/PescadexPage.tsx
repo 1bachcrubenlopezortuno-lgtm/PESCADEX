@@ -4,7 +4,7 @@ import { SPECIES } from '../catalog/catalog';
 import { RARITIES, RARITY_LABEL, type Habitat, type Rarity } from '../catalog/types';
 import { listOutings, toGameCatch } from '../data/api';
 import { levelInfo } from '../game/levels';
-import { totalXp } from '../game/xp';
+import { isValidCatch, totalXp } from '../game/xp';
 import { pescadexProgress, unlockedSpeciesIds } from '../game/pescadex';
 import { SpeciesCard } from './SpeciesCard';
 import { useMyCatches } from './useMyCatches';
@@ -26,6 +26,18 @@ export function PescadexPage() {
   const game = useMemo(() => catches.map(toGameCatch), [catches]);
   const unlocked = useMemo(() => unlockedSpeciesIds(game), [game]);
   const progress = pescadexProgress(unlocked);
+  // Tu mejor foto de cada especie: la de la pieza más pesada (o la más reciente).
+  const photos = useMemo(() => {
+    const best = new Map<string, { url: string; w: number }>();
+    for (const c of catches) {
+      const url = c.photoUrls.find(Boolean);
+      if (!url || !isValidCatch(toGameCatch(c))) continue;
+      const w = c.weightG ?? 0;
+      const b = best.get(c.speciesId);
+      if (!b || w > b.w) best.set(c.speciesId, { url, w });
+    }
+    return best;
+  }, [catches]);
   const lvl = levelInfo(totalXp(game, outingCount));
   const initial = profile!.displayName.trim().charAt(0).toUpperCase();
 
@@ -70,7 +82,7 @@ export function PescadexPage() {
         </select>
       </div>
       <div className="species-grid">
-        {visible.map((s) => <SpeciesCard key={s.id} species={s} unlocked={unlocked.has(s.id)} />)}
+        {visible.map((s) => <SpeciesCard key={s.id} species={s} unlocked={unlocked.has(s.id)} photoUrl={photos.get(s.id)?.url} />)}
       </div>
     </div>
   );

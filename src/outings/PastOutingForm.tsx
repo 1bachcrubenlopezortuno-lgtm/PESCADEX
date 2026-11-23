@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import type { Species } from '../catalog/types';
 import { SpeciesPicker } from '../catches/SpeciesPicker';
-import { OUTING_MODE_LABEL, type LatLng, type NewOuting, type OutingMode, type Profile } from '../data/types';
+import { OUTING_MODE_LABEL, type LatLng, type NewOuting, type Outing, type OutingMode, type Profile } from '../data/types';
 import { MapPicker } from '../ui/MapPicker';
 
 export interface PastCatch {
@@ -32,19 +32,34 @@ const toNumber = (v: string) => {
   return v.trim() && Number.isFinite(n) && n > 0 ? n : undefined;
 };
 
+const pad = (n: number) => String(n).padStart(2, '0');
+const dayOf = (iso: string) => {
+  const d = new Date(iso);
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+};
+const timeOf = (iso: string | null) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+};
+
 let nextKey = 0;
 const emptyRow = (): Row => ({ key: nextKey++, species: null, weight: '', length: '', bait: '', photo: null });
 
-/** Apuntar una jornada que ya pasó: día, horas, sitio, participantes y lo que se pescó. */
-export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile[]; onSave(o: NewOuting, catches: PastCatch[]): Promise<void>; onCancel(): void }) {
-  const [day, setDay] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [mode, setMode] = useState<OutingMode>('surfcasting');
-  const [companions, setCompanions] = useState<string[]>([]);
-  const [location, setLocation] = useState<LatLng | null>(null);
-  const [placeName, setPlaceName] = useState('');
-  const [note, setNote] = useState('');
+/**
+ * Apuntar una jornada que ya pasó (día, horas, sitio, participantes y lo que se pescó),
+ * o editar una existente si se pasa `initial` (sin la parte de peces).
+ */
+export function PastOutingForm({ friends, onSave, onCancel, initial }: { friends: Profile[]; onSave(o: NewOuting, catches: PastCatch[]): Promise<void>; onCancel(): void; initial?: Outing }) {
+  const editing = Boolean(initial);
+  const [day, setDay] = useState(initial ? dayOf(initial.startedAt) : '');
+  const [from, setFrom] = useState(initial ? timeOf(initial.startedAt) : '');
+  const [to, setTo] = useState(initial ? timeOf(initial.endedAt) : '');
+  const [mode, setMode] = useState<OutingMode>(initial?.mode ?? 'surfcasting');
+  const [companions, setCompanions] = useState<string[]>(initial?.companionIds ?? []);
+  const [location, setLocation] = useState<LatLng | null>(initial?.exact ?? null);
+  const [placeName, setPlaceName] = useState(initial?.placeName ?? '');
+  const [note, setNote] = useState(initial?.note ?? '');
   const [rows, setRows] = useState<Row[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,10 +68,12 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
 
   async function submit(e: FormEvent) {
     e.preventDefault();
-    if (!day || !from || !to) return setError('Indica el día y las horas.');
+    // Al editar una jornada en curso se puede dejar "Hasta" vacío.
+    const openEnded = editing && !initial!.endedAt && !to;
+    if (!day || !from || (!to && !openEnded)) return setError('Indica el día y las horas.');
     const start = localDateTime(day, from);
-    const end = localDateTime(day, to);
-    if (end <= start) return setError('La hora de fin tiene que ser posterior a la de inicio.');
+    const end = openEnded ? null : localDateTime(day, to);
+    if (end && end <= start) return setError('La hora de fin tiene que ser posterior a la de inicio.');
     if (start > new Date()) return setError('Esa fecha todavía no ha llegado.');
     if (rows.some((r) => !r.species)) return setError('Elige la especie de cada pez o quita la fila.');
     setBusy(true);
@@ -64,13 +81,13 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
     try {
       await onSave(
         {
-          id: crypto.randomUUID(),
+          id: initial?.id ?? crypto.randomUUID(),
           startedAt: start.toISOString(),
-          endedAt: end.toISOString(),
+          endedAt: end?.toISOString(),
           mode,
           companionIds: companions,
           location,
-          shareExact: false,
+          shareExact: initial?.shareExact ?? false,
           note: note.trim() || undefined,
           placeName: placeName.trim() || undefined,
         },
@@ -93,7 +110,7 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
 
   return (
     <form className="card" onSubmit={submit} noValidate>
-      <h2>Jornada pasada</h2>
+      <h2>{editing ? 'Editar jornada' : 'Jornada pasada'}</h2>
       <label className="field">
         Día
         <input type="date" value={day} onChange={(e) => setDay(e.target.value)} />
@@ -138,6 +155,7 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
         </fieldset>
       )}
 
+      {!editing && <>
       <span className="field">Lo que pescaste</span>
       {rows.map((r, i) => (
         <div key={r.key} className="past-catch" data-testid={`past-catch-${i}`}>
@@ -168,6 +186,7 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
         </div>
       ))}
       <button type="button" className="btn secondary block" onClick={() => setRows((rs) => [...rs, emptyRow()])}>Añadir pez</button>
+      </>}
 
       <label className="field" style={{ marginTop: 14 }}>
         Nota
@@ -175,7 +194,7 @@ export function PastOutingForm({ friends, onSave, onCancel }: { friends: Profile
       </label>
       {error && <p className="error">{error}</p>}
       <div className="row">
-        <button className="btn" disabled={busy}>{busy ? 'Guardando…' : 'Guardar jornada'}</button>
+        <button className="btn" disabled={busy}>{busy ? 'Guardando…' : editing ? 'Guardar cambios' : 'Guardar jornada'}</button>
         <button type="button" className="btn secondary" onClick={onCancel}>Cancelar</button>
       </div>
     </form>

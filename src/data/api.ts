@@ -94,6 +94,31 @@ export async function deleteCatch(id: string): Promise<void> {
   fail(error);
 }
 
+export interface OutingPatch {
+  startedAt: string;
+  endedAt?: string;
+  mode: Outing['mode'];
+  note?: string;
+  placeName?: string;
+  companionIds: string[];
+  location: LatLng | null;
+}
+
+export async function updateOuting(id: string, p: OutingPatch): Promise<void> {
+  const { error } = await supabase
+    .from('outings')
+    .update({ started_at: p.startedAt, ended_at: p.endedAt ?? null, mode: p.mode, note: p.note?.trim() || null, place_name: p.placeName?.trim() || null })
+    .eq('id', id);
+  fail(error);
+  const { data } = await supabase.from('outing_companions').select('user_id').eq('outing_id', id);
+  const current = (data ?? []).map((r: Row) => r.user_id as string);
+  const removed = current.filter((u) => !p.companionIds.includes(u));
+  const added = p.companionIds.filter((u) => !current.includes(u));
+  if (removed.length) fail((await supabase.from('outing_companions').delete().eq('outing_id', id).in('user_id', removed)).error);
+  if (added.length) fail((await supabase.from('outing_companions').insert(added.map((user_id) => ({ outing_id: id, user_id })))).error);
+  if (p.location) fail((await supabase.from('outing_locations').upsert({ outing_id: id, ...p.location })).error);
+}
+
 export async function endOuting(id: string, endedAt: string): Promise<void> {
   const { error } = await supabase.from('outings').update({ ended_at: endedAt }).eq('id', id);
   fail(error);

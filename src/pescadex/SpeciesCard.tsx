@@ -3,7 +3,7 @@ import { speciesNumber } from '../catalog/catalog';
 import type { Species } from '../catalog/types';
 import { SpeciesArt } from './SpeciesArt';
 
-export function SpeciesCard({ species, unlocked }: { species: Species; unlocked: boolean }) {
+export function SpeciesCard({ species, unlocked, photoUrl }: { species: Species; unlocked: boolean; photoUrl?: string }) {
   const locked = species.legal === 'protegida';
   return (
     <Link
@@ -14,7 +14,7 @@ export function SpeciesCard({ species, unlocked }: { species: Species; unlocked:
     >
       <span className="species-num">{speciesNumber(species.id)}</span>
       {species.legal === 'regulada' && <span className="species-badge" title="Regulada">⚠️</span>}
-      <SpeciesArt species={species} revealed={unlocked} size={56} />
+      <SpeciesArt species={species} revealed={unlocked} size={56} photoUrl={photoUrl} />
       <span className="species-name">{species.commonName}</span>
     </Link>
   );

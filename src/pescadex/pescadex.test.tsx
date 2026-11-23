@@ -64,3 +64,23 @@ test('ficha sin capturar muestra el nombre y la interrogación', async () => {
   expect(await screen.findByRole('heading', { name: 'Urta' })).toBeInTheDocument();
   expect(screen.getByTestId('art-unknown')).toBeInTheDocument();
 });
+
+test('la ficha muestra las fotos del grupo de esa especie', async () => {
+  backend.profiles = [backend.profile!, { id: 'u2', displayName: 'Pepe', avatarPath: null }];
+  backend.catches = [
+    makeCatch({ speciesId: 'dorada', userId: 'u2', photoUrls: ['https://foto/pepe.jpg'] }),
+    makeCatch({ speciesId: 'dorada', userId: 'u1', photoUrls: ['https://foto/ana.jpg'] }),
+    makeCatch({ speciesId: 'sargo', userId: 'u2', photoUrls: ['https://foto/sargo.jpg'] }),
+  ];
+  renderApp('/especie/dorada');
+  expect(await screen.findByRole('heading', { name: /Fotos del grupo/ })).toBeInTheDocument();
+  expect(await screen.findByAltText('Dorada de Pepe')).toHaveAttribute('src', 'https://foto/pepe.jpg');
+  expect(screen.queryByAltText(/Sargo/)).toBeNull();
+});
+
+test('la tarjeta de una especie capturada usa tu foto', async () => {
+  backend.catches = [makeCatch({ speciesId: 'dorada', photoUrls: ['https://foto/mia.jpg'] })];
+  renderApp('/');
+  const art = await within(await screen.findByTestId('species-dorada')).findByTestId('art-revealed');
+  expect(art.querySelector('img')).toHaveAttribute('src', 'https://foto/mia.jpg');
+});

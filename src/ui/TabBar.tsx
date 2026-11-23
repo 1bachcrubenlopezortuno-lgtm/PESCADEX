@@ -13,6 +13,9 @@ const ICONS: Record<string, ReactNode> = {
   registrar: (
     <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" {...stroke} strokeWidth={2.6} /></svg>
   ),
+  ranking: (
+    <svg viewBox="0 0 24 24"><path d="M8 21V11h8v10M3 21v-6h5M16 21v-8h5M2 21h20" {...stroke} /></svg>
+  ),
   perfil: (
     <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" {...stroke} /><path d="M4 21c1-5 5-7 8-7s7 2 8 7" {...stroke} /></svg>
   ),
@@ -22,6 +25,7 @@ const TABS = [
   { to: '/', label: 'Pescadex', icon: 'pescadex', end: true },
   { to: '/cuaderno', label: 'Cuaderno', icon: 'cuaderno' },
   { to: '/registrar', label: 'Registrar', icon: 'registrar', primary: true },
+  { to: '/ranking', label: 'Ranking', icon: 'ranking' },
   { to: '/perfil', label: 'Perfil', icon: 'perfil' },
 ];
 

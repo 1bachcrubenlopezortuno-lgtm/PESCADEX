@@ -77,6 +77,7 @@ export async function apiMock() {
     endOuting: vi.fn(async () => {}),
     createCatch: vi.fn(async () => {}),
     deleteOuting: vi.fn(async () => {}),
+    updateOuting: vi.fn(async () => {}),
     deleteCatch: vi.fn(async () => {}),
     addCatchPhoto: vi.fn(async () => {}),
   };
