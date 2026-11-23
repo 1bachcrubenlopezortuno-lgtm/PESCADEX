@@ -134,8 +134,9 @@ export function RegisterPage() {
           await addCatchPhoto(catchId, await preparePhoto(f));
           uploaded++;
         }
-      } catch {
-        warnings.push('La captura se guardó, pero no se pudo subir la foto. Añádela desde el detalle de la captura.');
+      } catch (err) {
+        const why = err instanceof Error ? ` (${err.message})` : '';
+        warnings.push(`La captura se guardó, pero no se pudo subir la foto${why}. Añádela desde el detalle de la captura.`);
       }
       if (!location && !pastOuting) warnings.push('📍 Sin ubicación: no se pudo obtener el GPS.');
 
@@ -195,7 +196,7 @@ export function RegisterPage() {
 
       <label className="field">
         Fotos
-        <input type="file" accept="image/*" capture="environment" multiple onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />
+        <input type="file" accept="image/*" multiple onChange={(e) => setFiles(Array.from(e.target.files ?? []))} />
       </label>
       {files.length === 0 && <p className="muted small">Sin foto la captura se guarda, pero no da XP ni desbloquea la especie.</p>}
       {files.length > 0 && (

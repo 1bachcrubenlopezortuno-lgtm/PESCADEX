@@ -116,3 +116,19 @@ test('sin jornada activa el GPS se pide una sola vez', async () => {
   await waitFor(() => expect(api.createCatch).toHaveBeenCalled());
   expect(geoRequest.calls).toBe(1);
 });
+
+test('las fotos se pueden elegir de la galería (no fuerza la cámara)', async () => {
+  renderApp('/registrar');
+  const input = await screen.findByLabelText('Fotos');
+  expect(input).not.toHaveAttribute('capture');
+  expect(input).toHaveAttribute('accept', 'image/*');
+});
+
+test('si falla la subida, muestra el motivo', async () => {
+  vi.mocked(api.addCatchPhoto).mockRejectedValueOnce(new Error('Bucket not found'));
+  renderApp('/registrar');
+  await userEvent.upload(await screen.findByLabelText('Fotos'), photo());
+  await pickSpecies('dora', /Dorada/);
+  await userEvent.click(screen.getByRole('button', { name: 'Guardar captura' }));
+  expect(await screen.findByText(/Bucket not found/)).toBeInTheDocument();
+});

@@ -35,8 +35,8 @@ export function CatchPage() {
     try {
       for (const f of Array.from(files)) await addCatchPhoto(c.id, await preparePhoto(f));
       load();
-    } catch {
-      setError('No se pudo subir la foto. Inténtalo de nuevo.');
+    } catch (err) {
+      setError(`No se pudo subir la foto${err instanceof Error ? ` (${err.message})` : ''}. Inténtalo de nuevo.`);
     } finally {
       setUploading(false);
     }

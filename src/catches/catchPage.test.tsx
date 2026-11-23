@@ -36,3 +36,11 @@ test('captura ajena sin foto no tiene botón de añadir', async () => {
   expect(await screen.findByText('Sin foto · no puntúa')).toBeInTheDocument();
   expect(screen.queryByLabelText('Añadir foto')).toBeNull();
 });
+
+test('si falla añadir la foto, muestra el motivo', async () => {
+  backend.catches = [makeCatch({ id: 'c-err', photoUrls: [] })];
+  vi.mocked(api.addCatchPhoto).mockRejectedValueOnce(new Error('new row violates row-level security policy'));
+  renderApp('/captura/c-err');
+  await userEvent.upload(await screen.findByLabelText('Añadir foto'), new File(['img'], 'f.jpg', { type: 'image/jpeg' }));
+  expect(await screen.findByText(/row-level security/)).toBeInTheDocument();
+});
